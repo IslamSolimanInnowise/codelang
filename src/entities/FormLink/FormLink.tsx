@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useLocation } from "react-router";
-import { StyledFormLink } from "./FormLink.styles";
+import { StyledAuthLink, StyledFormLink } from "./FormLink.styles";
 
 const FormLink: React.FC = () => {
   const path = useLocation().pathname.split("/").pop();
@@ -12,7 +12,13 @@ const FormLink: React.FC = () => {
           ? `Already have an account?`
           : `Don't have an account yet?`}
       </p>
-      <Button>{path === "register" ? "Sign in" : "Register"}</Button>
+      <Button>
+        {path === "register" ? (
+          <StyledAuthLink to="/login">Sign in</StyledAuthLink>
+        ) : (
+          <StyledAuthLink to="/register">Register</StyledAuthLink>
+        )}
+      </Button>
     </StyledFormLink>
   );
 };

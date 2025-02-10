@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import styled from "styled-components";
 
 const StyledFormLink = styled.div`
@@ -7,4 +8,9 @@ const StyledFormLink = styled.div`
   gap: 1rem;
 `;
 
-export { StyledFormLink };
+const StyledAuthLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
+export { StyledFormLink, StyledAuthLink };
