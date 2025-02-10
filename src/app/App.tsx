@@ -1,13 +1,15 @@
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "../shared/styles/themes";
 import { GlobalStyles } from "../shared/styles/globalStyles";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../shared/hooks";
+import { switchTheme } from "../features/theme/themeSlice";
 
 const App: React.FC = () => {
-  const [isDark, setIsDark] = useState(true);
+  const { isDark } = useAppSelector((state) => state.theme);
+  const dispatch = useAppDispatch();
 
   function handleThemeSwitch() {
-    setIsDark((prev) => !prev);
+    dispatch(switchTheme());
   }
 
   return (
