@@ -8,7 +8,6 @@ const StyledHeader = styled.header`
   background-color: whitesmoke;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: 1rem; */
   box-shadow: ${({ theme }) =>
     theme.backgroundColor === "black"
       ? "0 2px 4px rgba(255, 255, 255, 0.9)"
@@ -17,7 +16,6 @@ const StyledHeader = styled.header`
 
 const StyledHeading1 = styled.h1`
   color: #1976d2;
-  pointer-events: none;
 `;
 
 const StyledNavList = styled.ul`

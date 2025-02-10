@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const HomeMain = styled.main`
+  margin-top: 4rem;
   padding: 1rem;
   text-align: center;
 `;

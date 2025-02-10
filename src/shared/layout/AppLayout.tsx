@@ -19,7 +19,9 @@ const AppLayout: React.FC = () => {
   return (
     <>
       <StyledHeader>
-        <StyledHeading1>CodeLang</StyledHeading1>
+        <StyledNavLink to="/">
+          <StyledHeading1>CodeLang</StyledHeading1>
+        </StyledNavLink>
         <nav>
           <StyledNavList>
             <li>
@@ -29,7 +31,7 @@ const AppLayout: React.FC = () => {
             </li>
             <li>
               <Button variant="outlined">
-                <StyledNavLink to="">Sign in</StyledNavLink>
+                <StyledNavLink to="/login">Sign in</StyledNavLink>
               </Button>
             </li>
             <li>

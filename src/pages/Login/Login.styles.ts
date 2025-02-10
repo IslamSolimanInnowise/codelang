@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const RegsiterMain = styled.main`
+const LoginMain = styled.main`
   min-height: calc(100vh - 4rem);
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const RegisterContainer = styled.div`
+const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -15,4 +15,4 @@ const RegisterContainer = styled.div`
   align-items: center;
 `;
 
-export { RegsiterMain, RegisterContainer };
+export { LoginContainer, LoginMain };
