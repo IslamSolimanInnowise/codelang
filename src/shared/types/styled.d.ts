@@ -1,8 +1,9 @@
+import React from "react";
 import "styled-components/native";
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    backgroundColor: string;
-    color: string;
+    backgroundColor: React.CSSProperties["backgroundColor"];
+    color: React.CSSProperties["color"];
   }
 }
