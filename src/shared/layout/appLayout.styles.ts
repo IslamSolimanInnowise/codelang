@@ -4,6 +4,7 @@ import styled from "styled-components";
 const StyledHeader = styled.header`
   padding: 1rem;
   display: flex;
+  background-color: whitesmoke;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
@@ -14,7 +15,7 @@ const StyledHeader = styled.header`
 `;
 
 const StyledHeading1 = styled.h1`
-  color: grey;
+  color: #1976d2;
 `;
 
 const StyledNavList = styled.ul`
@@ -26,12 +27,7 @@ const StyledNavList = styled.ul`
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
-  color: grey;
-  transition: 0.3s;
-  border: 1px solid
-    ${({ theme }) => (theme.backgroundColor === "black" ? "white" : "black")};
-  border-radius: 1rem;
-  padding: 0.5rem;
+  color: inherit;
 `;
 
 export { StyledHeader, StyledHeading1, StyledNavList, StyledNavLink };
