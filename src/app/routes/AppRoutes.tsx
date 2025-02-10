@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import AppLayout from "../../shared/layout/AppLayout";
-import HomePage from "../../pages/Home";
+import HomePage from "../../pages/Home/Home";
 
 const AppRoutes: React.FC = () => {
   return (

@@ -24,17 +24,12 @@ const AppLayout: React.FC = () => {
           <StyledNavList>
             <li>
               <Button variant="outlined">
-                <StyledNavLink to="">Link 1</StyledNavLink>
+                <StyledNavLink to="">Register</StyledNavLink>
               </Button>
             </li>
             <li>
               <Button variant="outlined">
-                <StyledNavLink to="">Link 2</StyledNavLink>
-              </Button>
-            </li>
-            <li>
-              <Button variant="outlined">
-                <StyledNavLink to="">Link 3</StyledNavLink>
+                <StyledNavLink to="">Sign in</StyledNavLink>
               </Button>
             </li>
             <li>
