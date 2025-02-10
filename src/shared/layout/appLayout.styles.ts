@@ -2,12 +2,13 @@ import { NavLink } from "react-router";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
+  height: 4rem;
   padding: 1rem;
   display: flex;
   background-color: whitesmoke;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   box-shadow: ${({ theme }) =>
     theme.backgroundColor === "black"
       ? "0 2px 4px rgba(255, 255, 255, 0.9)"

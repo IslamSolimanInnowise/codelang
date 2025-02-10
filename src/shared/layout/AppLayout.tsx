@@ -24,7 +24,7 @@ const AppLayout: React.FC = () => {
           <StyledNavList>
             <li>
               <Button variant="outlined">
-                <StyledNavLink to="">Register</StyledNavLink>
+                <StyledNavLink to="/register">Register</StyledNavLink>
               </Button>
             </li>
             <li>
