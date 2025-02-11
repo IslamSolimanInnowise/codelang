@@ -1,4 +1,3 @@
-import { TextField } from "@mui/material";
 import styled from "styled-components";
 
 const StyledForm = styled.form`
@@ -21,15 +20,4 @@ const PasswordContainer = styled.div`
   justify-content: space-between;
 `;
 
-const StyledTextField = styled(TextField)`
-  background-color: ${({ theme }) =>
-    theme.backgroundColor === "black" ? "whitesmoke" : ""};
-  border-top-right-radius: 1rem;
-  border-top-left-radius: 1rem;
-
-  &.password-field {
-    width: 100%;
-  }
-`;
-
-export { StyledForm, PasswordContainer, StyledTextField };
+export { StyledForm, PasswordContainer };

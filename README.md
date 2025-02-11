@@ -2,8 +2,8 @@
 
 - алиасы => done
 - все в апп => done but store provider in main.tsx
-- ui-kit
 - 2 формы => done
+- ui-kit => added input
 - роуты как енам в shared
 - add index.tsx as public api in each module
 - react hook form

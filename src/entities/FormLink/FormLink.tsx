@@ -1,18 +1,28 @@
-import { useLocation } from "react-router";
-import { StyledFormLink } from "./FormLink.styles";
-import AuthFormSubmitBtn from "@shared/ui/AuthFormSubmit/AuthFormSubmitBtn";
+import { Button } from "@mui/material";
+import { StyledAuthLink, StyledFormLink } from "./FormLink.styles";
 
-const FormLink: React.FC = () => {
-  const path = useLocation().pathname.split("/").pop();
+interface FormLinkProps {
+  paragraphText: string;
+  buttonText: string;
+  path: string;
+}
 
+const FormLink: React.FC<FormLinkProps> = ({
+  buttonText,
+  paragraphText,
+  path,
+}) => {
   return (
     <StyledFormLink>
-      <p>
+      {/* <p>
         {path === "register"
           ? `Already have an account?`
           : `Don't have an account yet?`}
-      </p>
-      <AuthFormSubmitBtn />
+      </p> */}
+      <p>{paragraphText}</p>
+      <Button>
+        <StyledAuthLink to={path}>{buttonText}</StyledAuthLink>
+      </Button>
     </StyledFormLink>
   );
 };

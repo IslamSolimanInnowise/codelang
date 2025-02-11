@@ -1,14 +1,11 @@
 import { Button } from "@mui/material";
-import {
-  PasswordContainer,
-  StyledForm,
-  StyledTextField,
-} from "./RegisterForm.styles";
+import { PasswordContainer, StyledForm } from "./RegisterForm.styles";
+import Input from "@shared/ui/Input/Input";
 
 const RegisterForm: React.FC = () => {
   return (
     <StyledForm>
-      <StyledTextField
+      <Input
         label="Username"
         placeholder="Enter your username"
         type="text"
@@ -20,7 +17,7 @@ const RegisterForm: React.FC = () => {
         }}
       />
       <PasswordContainer>
-        <StyledTextField
+        <Input
           label="Password"
           placeholder="Enter your password"
           type="password"
@@ -37,7 +34,7 @@ const RegisterForm: React.FC = () => {
           }}
         />
 
-        <StyledTextField
+        <Input
           label="Confirm Password"
           placeholder="Confirm your password"
           type="password"

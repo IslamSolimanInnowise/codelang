@@ -7,7 +7,11 @@ const RegisterPage = () => {
     <AuthMain>
       <AuthContainer className="container">
         <RegisterForm />
-        <FormLink />
+        <FormLink
+          path="/login"
+          buttonText="Login"
+          paragraphText="Already have an account?"
+        />
       </AuthContainer>
     </AuthMain>
   );

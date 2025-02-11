@@ -7,7 +7,11 @@ const LoginPage = () => {
     <AuthMain>
       <AuthContainer className="container">
         <LoginForm />
-        <FormLink />
+        <FormLink
+          path="/register"
+          buttonText="Register"
+          paragraphText="Don't have an account yet?"
+        />
       </AuthContainer>
     </AuthMain>
   );
