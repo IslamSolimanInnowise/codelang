@@ -1,6 +1,6 @@
 import { useLocation } from "react-router";
 import { StyledFormLink } from "./FormLink.styles";
-import AuthFormSubmitBtn from "../../shared/ui/AuthFormSubmit/AuthFormSubmitBtn";
+import AuthFormSubmitBtn from "@shared/ui/AuthFormSubmit/AuthFormSubmitBtn";
 
 const FormLink: React.FC = () => {
   const path = useLocation().pathname.split("/").pop();

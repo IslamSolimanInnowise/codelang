@@ -6,8 +6,8 @@ import {
   StyledNavList,
 } from "./appLayout.styles";
 import { Button } from "@mui/material";
-import { switchTheme } from "../../features/theme/themeSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { switchTheme } from "@features/theme/themeSlice";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 
 const AppLayout: React.FC = () => {
   const { isLoggedIn } = useAppSelector((state) => state.auth);

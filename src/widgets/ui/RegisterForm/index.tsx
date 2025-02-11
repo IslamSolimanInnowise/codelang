@@ -1,14 +1,11 @@
-import { useLocation } from "react-router";
 import { Button } from "@mui/material";
 import {
   PasswordContainer,
   StyledForm,
   StyledTextField,
-} from "./AuthForm.styles";
+} from "./RegisterForm.styles";
 
-const AuthForm: React.FC = () => {
-  const path = useLocation().pathname.split("/").pop();
-
+const RegisterForm: React.FC = () => {
   return (
     <StyledForm>
       <StyledTextField
@@ -39,22 +36,22 @@ const AuthForm: React.FC = () => {
             },
           }}
         />
-        {path === "register" && (
-          <StyledTextField
-            label="Confirm Password"
-            placeholder="Confirm your password"
-            type="password"
-            variant="filled"
-            name="confirmPassword"
-            required
-            className="password-field"
-          />
-        )}
+
+        <StyledTextField
+          label="Confirm Password"
+          placeholder="Confirm your password"
+          type="password"
+          variant="filled"
+          name="confirmPassword"
+          required
+          className="password-field"
+        />
       </PasswordContainer>
       <Button variant="contained" type="submit">
-        {path === "register" ? "Register" : "Sign in"}
+        Register
       </Button>
     </StyledForm>
   );
 };
-export default AuthForm;
+
+export default RegisterForm;

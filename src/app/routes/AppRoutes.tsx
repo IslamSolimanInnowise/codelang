@@ -1,8 +1,9 @@
+import HomePage from "@pages/Home/Home";
+import LoginPage from "@pages/Login";
+import RegisterPage from "@pages/Register";
+import { useAppSelector } from "@shared/hooks";
+import AppLayout from "@shared/layout/AppLayout";
 import { Routes, Route } from "react-router";
-import AppLayout from "../../shared/layout/AppLayout";
-import HomePage from "../../pages/Home/Home";
-import AuthPage from "../../pages/Auth/Auth";
-import { useAppSelector } from "../../shared/hooks";
 
 const AppRoutes: React.FC = () => {
   const { isLoggedIn } = useAppSelector((state) => state.auth);
@@ -11,8 +12,8 @@ const AppRoutes: React.FC = () => {
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<HomePage />} />
-        {!isLoggedIn && <Route path="/register" element={<AuthPage />} />}
-        <Route path="/login" element={<AuthPage />} />
+        {!isLoggedIn && <Route path="/register" element={<RegisterPage />} />}
+        <Route path="/login" element={<LoginPage />} />
       </Route>
     </Routes>
   );
