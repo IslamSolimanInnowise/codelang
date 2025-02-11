@@ -18,6 +18,9 @@ const AuthForm: React.FC = () => {
         variant="filled"
         name="username"
         required
+        slotProps={{
+          htmlInput: { minLength: 5 },
+        }}
       />
       <PasswordContainer>
         <StyledTextField
@@ -28,6 +31,13 @@ const AuthForm: React.FC = () => {
           name="password"
           required
           className="password-field"
+          slotProps={{
+            htmlInput: {
+              pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).+$",
+              title:
+                "Password must contain at least one lowercase letter, one uppercase letter, one number and one symbol!",
+            },
+          }}
         />
         {path === "register" && (
           <StyledTextField
@@ -41,7 +51,7 @@ const AuthForm: React.FC = () => {
           />
         )}
       </PasswordContainer>
-      <Button variant="contained">
+      <Button variant="contained" type="submit">
         {path === "register" ? "Register" : "Sign in"}
       </Button>
     </StyledForm>

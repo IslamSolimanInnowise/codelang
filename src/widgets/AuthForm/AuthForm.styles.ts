@@ -4,6 +4,7 @@ import styled from "styled-components";
 const StyledForm = styled.form`
   width: 90%;
   padding: 2rem;
+  min-width: 300px;
   max-width: 1000px;
   border-radius: 1rem;
   display: flex;

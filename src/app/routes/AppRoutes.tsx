@@ -5,13 +5,13 @@ import AuthPage from "../../pages/Auth/Auth";
 import { useAppSelector } from "../../shared/hooks";
 
 const AppRoutes: React.FC = () => {
-  const { isRegistered } = useAppSelector((state) => state.auth);
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
 
   return (
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<HomePage />} />
-        {!isRegistered && <Route path="/register" element={<AuthPage />} />}
+        {!isLoggedIn && <Route path="/register" element={<AuthPage />} />}
         <Route path="/login" element={<AuthPage />} />
       </Route>
     </Routes>
