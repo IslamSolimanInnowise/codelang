@@ -1,16 +1,12 @@
+import { useLocation } from "react-router";
 import { Button } from "@mui/material";
 import {
   PasswordContainer,
   StyledForm,
   StyledTextField,
 } from "./AuthForm.styles";
-import { useLocation } from "react-router";
 
-interface AuthFormProps {
-  isRegistered: boolean;
-}
-
-const AuthForm: React.FC<AuthFormProps> = ({ isRegistered }) => {
+const AuthForm: React.FC = () => {
   const path = useLocation().pathname.split("/").pop();
 
   return (
@@ -33,7 +29,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isRegistered }) => {
           required
           className="password-field"
         />
-        {!isRegistered && (
+        {path === "register" && (
           <StyledTextField
             label="Confirm Password"
             placeholder="Confirm your password"
