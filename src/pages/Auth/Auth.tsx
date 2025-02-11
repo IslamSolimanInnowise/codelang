@@ -1,18 +1,18 @@
 import FormLink from "../../entities/FormLink/FormLink";
 import { useAppSelector } from "../../shared/hooks";
 import AuthForm from "../../widgets/AuthForm/AuthForm";
-import { RegisterContainer, RegsiterMain } from "./Register.styles";
+import { AuthContainer, AuthMain } from "./Auth.styles";
 
-const RegisterPage = () => {
+const AuthPage = () => {
   const { isRegistered } = useAppSelector((state) => state.auth);
 
   return (
-    <RegsiterMain>
-      <RegisterContainer className="container">
+    <AuthMain>
+      <AuthContainer className="container">
         <AuthForm isRegistered={isRegistered} />
         <FormLink />
-      </RegisterContainer>
-    </RegsiterMain>
+      </AuthContainer>
+    </AuthMain>
   );
 };
-export default RegisterPage;
+export default AuthPage;
