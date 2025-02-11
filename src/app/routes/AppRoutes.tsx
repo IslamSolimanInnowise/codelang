@@ -3,6 +3,7 @@ import LoginPage from "@pages/Login";
 import RegisterPage from "@pages/Register";
 import { useAppSelector } from "@shared/hooks";
 import AppLayout from "@shared/layout/AppLayout";
+import { RoutesEnum } from "@shared/routes";
 import { Routes, Route } from "react-router";
 
 const AppRoutes: React.FC = () => {
@@ -11,9 +12,11 @@ const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route element={<AppLayout />}>
-        <Route path="/" element={<HomePage />} />
-        {!isLoggedIn && <Route path="/register" element={<RegisterPage />} />}
-        <Route path="/login" element={<LoginPage />} />
+        <Route path={RoutesEnum.Home} element={<HomePage />} />
+        {!isLoggedIn && (
+          <Route path={RoutesEnum.Register} element={<RegisterPage />} />
+        )}
+        <Route path={RoutesEnum.Login} element={<LoginPage />} />
       </Route>
     </Routes>
   );
