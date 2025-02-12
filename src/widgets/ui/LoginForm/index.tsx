@@ -1,36 +1,45 @@
 import { Button } from "@mui/material";
 import { StyledForm } from "./LoginForm.styles";
 import Input from "@shared/ui/Input/Input";
+import { useForm } from "react-hook-form";
+import { defaultValues, loginFormSchema, LoginSchema } from "./schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const LoginForm: React.FC = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<LoginSchema>({
+    mode: "all",
+    resolver: zodResolver(loginFormSchema),
+    defaultValues,
+  });
+
+  const onSubmit = () => {
+    // console.log("Login Submitted!");
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <Input
+        {...register("username")}
         label="Username"
         placeholder="Enter your username"
         type="text"
         variant="filled"
-        name="username"
-        required
-        slotProps={{
-          htmlInput: { minLength: 5 },
-        }}
+        error={Boolean(errors.username)}
+        helperText={errors.username?.message}
       />
       <Input
+        {...register("password")}
         label="Password"
         placeholder="Enter your password"
         type="password"
         variant="filled"
-        name="password"
-        required
         className="password-field"
-        slotProps={{
-          htmlInput: {
-            pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).+$",
-            title:
-              "Password must contain at least one lowercase letter, one uppercase letter, one number and one symbol!",
-          },
-        }}
+        error={Boolean(errors.password)}
+        helperText={errors.password?.message}
       />
       <Button variant="contained" type="submit">
         Login
