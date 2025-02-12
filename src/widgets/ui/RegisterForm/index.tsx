@@ -1,52 +1,73 @@
 import { Button } from "@mui/material";
 import { PasswordContainer, StyledForm } from "./RegisterForm.styles";
 import Input from "@shared/ui/Input/Input";
+import { useForm } from "react-hook-form";
+import { defaultValues, registerFormSchema, RegisterSchema } from "./schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { registerUser } from "@features/auth/authSlice";
 
 const RegisterForm: React.FC = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<RegisterSchema>({
+    mode: "all",
+    resolver: zodResolver(registerFormSchema),
+    defaultValues,
+  });
+
+  const { error, isLoading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+
+  const onSubmit = (data: RegisterSchema) => {
+    console.log("Form can only be submitted without errors!");
+    const { username, password } = data;
+    dispatch(registerUser({ username, password }));
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <Input
+        {...register("username")}
         label="Username"
         placeholder="Enter your username"
         type="text"
         variant="filled"
         name="username"
-        required
-        slotProps={{
-          htmlInput: { minLength: 5 },
-        }}
+        error={Boolean(errors.username)}
+        helperText={errors.username?.message}
       />
       <PasswordContainer>
         <Input
+          {...register("password")}
           label="Password"
           placeholder="Enter your password"
           type="password"
           variant="filled"
           name="password"
-          required
           className="password-field"
-          slotProps={{
-            htmlInput: {
-              pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).+$",
-              title:
-                "Password must contain at least one lowercase letter, one uppercase letter, one number and one symbol!",
-            },
-          }}
+          error={Boolean(errors.password)}
+          helperText={errors.password?.message}
         />
 
         <Input
+          {...register("confirmPassword")}
           label="Confirm Password"
           placeholder="Confirm your password"
           type="password"
           variant="filled"
           name="confirmPassword"
-          required
           className="password-field"
+          error={Boolean(errors.confirmPassword)}
+          helperText={errors.confirmPassword?.message}
         />
       </PasswordContainer>
-      <Button variant="contained" type="submit">
-        Register
+      <Button variant="contained" type="submit" disabled={isLoading}>
+        {isLoading ? "Registering..." : "Register"}
       </Button>
+      {error && <div>{error}</div>}
     </StyledForm>
   );
 };

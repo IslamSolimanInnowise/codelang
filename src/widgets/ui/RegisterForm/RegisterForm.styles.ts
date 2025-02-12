@@ -4,7 +4,7 @@ const StyledForm = styled.form`
   width: 90%;
   padding: 2rem;
   min-width: 300px;
-  max-width: 1000px;
+  max-width: 50rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
