@@ -34,13 +34,13 @@ export const registerUser = createAsyncThunk<
   ThunkReturnType,
   UserData,
   ThunkApiType
->("auth/register", async (data, thunkApi) => {
+>("auth/register", async (userData, thunkApi) => {
   try {
-    const response = await axiosInstance.post("/register", data);
+    const { data } = await axiosInstance.post("/register", userData);
 
-    console.log(response.data);
+    // console.log(data);
 
-    return response.data;
+    return data;
   } catch (error) {
     if (error instanceof Error) {
       return thunkApi.rejectWithValue(error.message);

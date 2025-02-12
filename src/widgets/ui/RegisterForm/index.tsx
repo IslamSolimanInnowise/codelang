@@ -22,9 +22,8 @@ const RegisterForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: RegisterSchema) => {
-    console.log("Form can only be submitted without errors!");
-    const { username, password } = data;
-    dispatch(registerUser({ username, password }));
+    // console.log("Form can only be submitted without errors!");
+    dispatch(registerUser(data));
   };
 
   return (
