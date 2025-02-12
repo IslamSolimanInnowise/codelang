@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
-const StyledForm = styled.form`
-  width: 90%;
+export const StyledForm = styled.form`
   padding: 2rem;
-  min-width: 300px;
-  max-width: 50rem;
+  min-width: 20rem;
+  max-width: 40rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -13,11 +12,3 @@ const StyledForm = styled.form`
     ${({ theme }) =>
       theme.backgroundColor === "black" ? "whitesmoke" : "black"};
 `;
-
-const PasswordContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-`;
-
-export { StyledForm, PasswordContainer };

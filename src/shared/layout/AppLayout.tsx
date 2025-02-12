@@ -1,10 +1,5 @@
 import { Outlet } from "react-router";
-import {
-  StyledHeader,
-  StyledHeading1,
-  StyledNavLink,
-  StyledNavList,
-} from "./appLayout.styles";
+import { StyledHeader, StyledNavLink, StyledNavList } from "./appLayout.styles";
 import { Button } from "@mui/material";
 import { switchTheme } from "@features/theme/themeSlice";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
@@ -20,9 +15,7 @@ const AppLayout: React.FC = () => {
   return (
     <>
       <StyledHeader>
-        <StyledNavLink to="/">
-          <StyledHeading1>CodeLang</StyledHeading1>
-        </StyledNavLink>
+        <StyledNavLink to="/">CodeLang</StyledNavLink>
         <nav>
           <StyledNavList>
             {!isLoggedIn && (

@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { PasswordContainer, StyledForm } from "./RegisterForm.styles";
+import { StyledForm } from "./RegisterForm.styles";
 import Input from "@shared/ui/Input/Input";
 import { useForm } from "react-hook-form";
 import { defaultValues, registerFormSchema, RegisterSchema } from "./schema";
@@ -35,35 +35,30 @@ const RegisterForm: React.FC = () => {
         placeholder="Enter your username"
         type="text"
         variant="filled"
-        name="username"
         error={Boolean(errors.username)}
         helperText={errors.username?.message}
       />
-      <PasswordContainer>
-        <Input
-          {...register("password")}
-          label="Password"
-          placeholder="Enter your password"
-          type="password"
-          variant="filled"
-          name="password"
-          className="password-field"
-          error={Boolean(errors.password)}
-          helperText={errors.password?.message}
-        />
+      <Input
+        {...register("password")}
+        label="Password"
+        placeholder="Enter your password"
+        type="password"
+        variant="filled"
+        className="password-field"
+        error={Boolean(errors.password)}
+        helperText={errors.password?.message}
+      />
 
-        <Input
-          {...register("confirmPassword")}
-          label="Confirm Password"
-          placeholder="Confirm your password"
-          type="password"
-          variant="filled"
-          name="confirmPassword"
-          className="password-field"
-          error={Boolean(errors.confirmPassword)}
-          helperText={errors.confirmPassword?.message}
-        />
-      </PasswordContainer>
+      <Input
+        {...register("confirmPassword")}
+        label="Confirm Password"
+        placeholder="Confirm your password"
+        type="password"
+        variant="filled"
+        className="password-field"
+        error={Boolean(errors.confirmPassword)}
+        helperText={errors.confirmPassword?.message}
+      />
       <Button variant="contained" type="submit" disabled={isLoading}>
         {isLoading ? "Registering..." : "Register"}
       </Button>

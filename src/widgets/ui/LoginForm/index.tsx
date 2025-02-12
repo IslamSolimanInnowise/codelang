@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { PasswordContainer, StyledForm } from "./LoginForm.styles";
+import { StyledForm } from "./LoginForm.styles";
 import Input from "@shared/ui/Input/Input";
 
 const LoginForm: React.FC = () => {
@@ -16,24 +16,22 @@ const LoginForm: React.FC = () => {
           htmlInput: { minLength: 5 },
         }}
       />
-      <PasswordContainer>
-        <Input
-          label="Password"
-          placeholder="Enter your password"
-          type="password"
-          variant="filled"
-          name="password"
-          required
-          className="password-field"
-          slotProps={{
-            htmlInput: {
-              pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).+$",
-              title:
-                "Password must contain at least one lowercase letter, one uppercase letter, one number and one symbol!",
-            },
-          }}
-        />
-      </PasswordContainer>
+      <Input
+        label="Password"
+        placeholder="Enter your password"
+        type="password"
+        variant="filled"
+        name="password"
+        required
+        className="password-field"
+        slotProps={{
+          htmlInput: {
+            pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).+$",
+            title:
+              "Password must contain at least one lowercase letter, one uppercase letter, one number and one symbol!",
+          },
+        }}
+      />
       <Button variant="contained" type="submit">
         Login
       </Button>

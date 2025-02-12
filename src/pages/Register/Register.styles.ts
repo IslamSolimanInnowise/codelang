@@ -1,19 +1,11 @@
 import styled from "styled-components";
 
-const AuthMain = styled.main`
-  min-height: calc(100vh - 4rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const AuthContainer = styled.div`
-  width: 100%;
+export const AuthMain = styled.main`
+  height: 100%;
+  min-height: 30rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
 `;
-
-export { AuthContainer, AuthMain };

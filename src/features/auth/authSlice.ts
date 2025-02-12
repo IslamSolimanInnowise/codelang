@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { axiosInstance } from "@shared/api/axios";
 
 interface AuthState {
   isRegistered: boolean;
@@ -20,23 +20,33 @@ const initialState: AuthState = {
   error: null,
 };
 
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async (data: UserData, thunkApi) => {
-    try {
-      const response = await axios.post(
-        "https://codelang.vercel.app/api/register",
-        data
-      );
+interface ThunkReturnType {
+  id: string;
+  username: string;
+  role: string;
+}
 
-      return response.data;
-    } catch (error) {
-      if (error instanceof Error) {
-        return thunkApi.rejectWithValue(error.message);
-      }
+interface ThunkApiType {
+  rejectValue: string | null;
+}
+
+export const registerUser = createAsyncThunk<
+  ThunkReturnType,
+  UserData,
+  ThunkApiType
+>("auth/register", async (data, thunkApi) => {
+  try {
+    const response = await axiosInstance.post("/register", data);
+
+    console.log(response.data);
+
+    return response.data;
+  } catch (error) {
+    if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
     }
   }
-);
+});
 
 const authSlice = createSlice({
   name: "auth",
@@ -49,14 +59,9 @@ const authSlice = createSlice({
         state.error = null;
         state.isRegistered = false;
       })
-      .addCase(registerUser.fulfilled, (state) => {
-        state.isLoading = false;
-        state.error = null;
-        state.isRegistered = true;
-      })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload as string | null;
+        state.error = action.payload!;
         state.isRegistered = false;
       });
   },

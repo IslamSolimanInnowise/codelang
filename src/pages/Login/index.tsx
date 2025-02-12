@@ -1,18 +1,14 @@
-import FormLink from "@entities/FormLink/FormLink";
-import { AuthContainer, AuthMain } from "./Login.styles";
+import { AuthMain } from "./Login.styles";
 import LoginForm from "@widgets/ui/LoginForm";
+import { Link } from "react-router";
+import { RoutesEnum } from "@shared/routes";
 
 const LoginPage = () => {
   return (
     <AuthMain>
-      <AuthContainer className="container">
-        <LoginForm />
-        <FormLink
-          path="/register"
-          buttonText="Register"
-          paragraphText="Don't have an account yet?"
-        />
-      </AuthContainer>
+      <LoginForm />
+      <p>Don't have an account yet?</p>
+      <Link to={RoutesEnum.Register}>Register</Link>
     </AuthMain>
   );
 };
