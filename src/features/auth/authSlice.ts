@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
-// import { useNavigate } from "react-router";
-// import { RoutesEnum } from "@shared/routes";
 
 interface AuthState {
   isRegistered: boolean;
@@ -40,11 +38,8 @@ export const registerUser = createAsyncThunk<
 >("auth/register", async (userData, thunkApi) => {
   try {
     const { data } = await axiosInstance.post("/register", userData);
-    // console.log(data)
     return data;
   } catch (error) {
-    // console.log(error);
-
     if (error instanceof AxiosError) {
       return thunkApi.rejectWithValue(error?.response?.data.message);
     } else if (error instanceof Error) {
@@ -60,11 +55,8 @@ export const loginUser = createAsyncThunk<
 >("auth/login", async (userData, thunkApi) => {
   try {
     const { data } = await axiosInstance.post("/auth/login", userData);
-    // console.log(data);
     return data;
   } catch (error) {
-    // console.log(error);
-
     if (error instanceof AxiosError) {
       return thunkApi.rejectWithValue(error?.response?.data.message);
     } else if (error instanceof Error) {
