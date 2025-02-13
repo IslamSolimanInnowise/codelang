@@ -22,11 +22,11 @@ const LoginForm: React.FC = () => {
   const { onLoginSubmit, error, isLoading } = useAuth();
 
   const onSubmit = (data: LoginSchema) => {
-    onLoginSubmit(data);
-
-    if (!error) {
-      navigate(RoutesEnum.Home);
-    }
+    onLoginSubmit(data).then((data) => {
+      if (data.type.endsWith("fulfilled")) {
+        navigate(RoutesEnum.Home);
+      }
+    });
   };
 
   return (

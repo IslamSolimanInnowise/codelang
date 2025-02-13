@@ -10,11 +10,11 @@ const useAuth = () => {
   const dispatch = useAppDispatch();
 
   const onLoginSubmit = (data: LoginSchema) => {
-    dispatch(loginUser(data));
+    return dispatch(loginUser(data));
   };
 
   const onRegisterSubmit = (data: RegisterSchema) => {
-    dispatch(registerUser(data));
+    return dispatch(registerUser(data));
   };
 
   return {

@@ -22,11 +22,11 @@ const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: RegisterSchema) => {
-    onRegisterSubmit(data);
-
-    if (!error) {
-      navigate(RoutesEnum.Login);
-    }
+    onRegisterSubmit(data).then((data) => {
+      if (data.type.endsWith("fulfilled")) {
+        navigate(RoutesEnum.Login);
+      }
+    });
   };
 
   return (
