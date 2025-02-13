@@ -4,6 +4,8 @@ import Input from "@shared/ui/Input/Input";
 import { useForm } from "react-hook-form";
 import { defaultValues, loginFormSchema, LoginSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { loginUser } from "@features/auth/authSlice";
 
 const LoginForm: React.FC = () => {
   const {
@@ -16,8 +18,12 @@ const LoginForm: React.FC = () => {
     defaultValues,
   });
 
-  const onSubmit = () => {
+  const { error, isLoading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+
+  const onSubmit = (data: LoginSchema) => {
     // console.log("Login Submitted!");
+    dispatch(loginUser(data));
   };
 
   return (
@@ -41,9 +47,10 @@ const LoginForm: React.FC = () => {
         error={Boolean(errors.password)}
         helperText={errors.password?.message}
       />
-      <Button variant="contained" type="submit">
-        Login
+      <Button variant="contained" type="submit" disabled={isLoading}>
+        {isLoading ? "Logging in..." : "Login"}
       </Button>
+      {error && <div>{error}</div>}
     </StyledForm>
   );
 };

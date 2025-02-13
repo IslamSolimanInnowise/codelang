@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
+import { AxiosError } from "axios";
 
 interface AuthState {
   isRegistered: boolean;
@@ -13,13 +14,6 @@ interface UserData {
   password: string;
 }
 
-const initialState: AuthState = {
-  isRegistered: false,
-  isLoggedIn: false,
-  isLoading: false,
-  error: null,
-};
-
 interface ThunkReturnType {
   id: string;
   username: string;
@@ -30,6 +24,13 @@ interface ThunkApiType {
   rejectValue: string | null;
 }
 
+const initialState: AuthState = {
+  isRegistered: false,
+  isLoggedIn: false,
+  isLoading: false,
+  error: null,
+};
+
 export const registerUser = createAsyncThunk<
   ThunkReturnType,
   UserData,
@@ -37,12 +38,34 @@ export const registerUser = createAsyncThunk<
 >("auth/register", async (userData, thunkApi) => {
   try {
     const { data } = await axiosInstance.post("/register", userData);
-
     // console.log(data);
-
     return data;
   } catch (error) {
-    if (error instanceof Error) {
+    // console.log(error);
+
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
+
+export const loginUser = createAsyncThunk<
+  ThunkReturnType,
+  UserData,
+  ThunkApiType
+>("auth/login", async (userData, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/login", userData);
+    // console.log(data);
+    return data;
+  } catch (error) {
+    // console.log(error);
+
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -63,6 +86,21 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload!;
         state.isRegistered = false;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+        state.isLoggedIn = false;
+      })
+      .addCase(loginUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+        state.isLoggedIn = true;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload!;
+        state.isLoggedIn = false;
       });
   },
 });
