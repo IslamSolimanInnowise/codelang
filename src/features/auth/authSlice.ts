@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
+// import { useNavigate } from "react-router";
+// import { RoutesEnum } from "@shared/routes";
 
 interface AuthState {
   isRegistered: boolean;
@@ -38,7 +40,7 @@ export const registerUser = createAsyncThunk<
 >("auth/register", async (userData, thunkApi) => {
   try {
     const { data } = await axiosInstance.post("/register", userData);
-    // console.log(data);
+    // console.log(data)
     return data;
   } catch (error) {
     // console.log(error);
@@ -81,6 +83,11 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
         state.isRegistered = false;
+      })
+      .addCase(registerUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+        state.isRegistered = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;

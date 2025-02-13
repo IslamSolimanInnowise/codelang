@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { defaultValues, loginFormSchema, LoginSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAuth from "@widgets/hooks/useAuth";
-// import { useAppDispatch, useAppSelector } from "@shared/hooks";
-// import { loginUser } from "@features/auth/authSlice";
+import { RoutesEnum } from "@shared/routes";
+import { useNavigate } from "react-router";
 
 const LoginForm: React.FC = () => {
   const {
@@ -18,19 +18,19 @@ const LoginForm: React.FC = () => {
     resolver: zodResolver(loginFormSchema),
     defaultValues,
   });
-
-  // const { error, isLoading } = useAppSelector((state) => state.auth);
-  // const dispatch = useAppDispatch();
-
-  // const onSubmit = (data: LoginSchema) => {
-  //   // console.log("Login Submitted!");
-  //   dispatch(loginUser(data));
-  // };
-
+  const navigate = useNavigate();
   const { onLoginSubmit, error, isLoading } = useAuth();
 
+  const onSubmit = (data: LoginSchema) => {
+    onLoginSubmit(data);
+
+    if (!error) {
+      navigate(RoutesEnum.Home);
+    }
+  };
+
   return (
-    <StyledForm onSubmit={handleSubmit(onLoginSubmit)}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <Input
         {...register("username")}
         label="Username"
