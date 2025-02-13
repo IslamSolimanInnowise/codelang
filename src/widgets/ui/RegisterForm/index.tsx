@@ -4,8 +4,9 @@ import Input from "@shared/ui/Input/Input";
 import { useForm } from "react-hook-form";
 import { defaultValues, registerFormSchema, RegisterSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { registerUser } from "@features/auth/authSlice";
+import useAuth from "@widgets/hooks/useAuth";
+// import { useAppDispatch, useAppSelector } from "@shared/hooks";
+// import { registerUser } from "@features/auth/authSlice";
 
 const RegisterForm: React.FC = () => {
   const {
@@ -18,16 +19,18 @@ const RegisterForm: React.FC = () => {
     defaultValues,
   });
 
-  const { error, isLoading } = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
+  // const { error, isLoading } = useAppSelector((state) => state.auth);
+  // const dispatch = useAppDispatch();
 
-  const onSubmit = (data: RegisterSchema) => {
-    // console.log("Form can only be submitted without errors!");
-    dispatch(registerUser(data));
-  };
+  // const onSubmit = (data: RegisterSchema) => {
+  //   // console.log("Form can only be submitted without errors!");
+  //   dispatch(registerUser(data));
+  // };
+
+  const { error, isLoading, onRegisterSubmit } = useAuth();
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={handleSubmit(onRegisterSubmit)}>
       <Input
         {...register("username")}
         label="Username"
