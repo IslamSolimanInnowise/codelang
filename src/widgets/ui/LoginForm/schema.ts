@@ -2,6 +2,7 @@ import { z } from "zod";
 
 const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/;
 const minPasswordLength = 6;
+const minUsernameLength = 5;
 
 const passwordSchema = z
   .string()
@@ -14,7 +15,7 @@ const passwordSchema = z
   });
 
 const loginFormSchema = z.object({
-  username: z.string().nonempty("Username required!").min(5, {
+  username: z.string().nonempty("Username required!").min(minUsernameLength, {
     message: "Username must be longer than or equal to 5 characters",
   }),
   password: passwordSchema,

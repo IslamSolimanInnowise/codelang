@@ -18,19 +18,29 @@ const RegisterForm: React.FC = () => {
     resolver: zodResolver(registerFormSchema),
     defaultValues,
   });
-  const { error, isLoading, onRegisterSubmit } = useAuth();
+
+  const {
+    authStore: { isLoading, error },
+    onRegisterSubmit,
+  } = useAuth();
+
   const navigate = useNavigate();
 
-  const onSubmit = (data: RegisterSchema) => {
-    onRegisterSubmit(data).then((data) => {
-      if (data.type.endsWith("fulfilled")) {
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const action = await onRegisterSubmit(data);
+
+      if (action.type.endsWith("fulfilled")) {
+        // console.log(action);
         navigate(RoutesEnum.Login);
       }
-    });
-  };
+    } catch {
+      //ошибка обработана в санке
+    }
+  });
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={onSubmit}>
       <Input
         {...register("username")}
         label="Username"

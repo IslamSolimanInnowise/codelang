@@ -3,8 +3,6 @@ import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
 
 interface AuthState {
-  isRegistered: boolean;
-  isLoggedIn: boolean;
   isLoading: boolean;
   error: string | null;
 }
@@ -25,8 +23,6 @@ interface ThunkApiType {
 }
 
 const initialState: AuthState = {
-  isRegistered: false,
-  isLoggedIn: false,
   isLoading: false,
   error: null,
 };
@@ -58,6 +54,7 @@ export const loginUser = createAsyncThunk<
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {
+      // console.log(error);
       return thunkApi.rejectWithValue(error?.response?.data.message);
     } else if (error instanceof Error) {
       return thunkApi.rejectWithValue(error.message);
@@ -74,32 +71,26 @@ const authSlice = createSlice({
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
-        state.isRegistered = false;
       })
       .addCase(registerUser.fulfilled, (state) => {
         state.isLoading = false;
         state.error = null;
-        state.isRegistered = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload!;
-        state.isRegistered = false;
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
-        state.isLoggedIn = false;
       })
       .addCase(loginUser.fulfilled, (state) => {
         state.isLoading = false;
         state.error = null;
-        state.isLoggedIn = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload!;
-        state.isLoggedIn = false;
       });
   },
 });

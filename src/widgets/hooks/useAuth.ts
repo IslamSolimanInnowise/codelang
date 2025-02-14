@@ -4,9 +4,7 @@ import { LoginSchema } from "@widgets/ui/LoginForm/schema";
 import { RegisterSchema } from "@widgets/ui/RegisterForm/schema";
 
 const useAuth = () => {
-  const { error, isLoading, isLoggedIn, isRegistered } = useAppSelector(
-    (state) => state.auth
-  );
+  const authStore = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const onLoginSubmit = (data: LoginSchema) => {
@@ -18,10 +16,7 @@ const useAuth = () => {
   };
 
   return {
-    error,
-    isLoading,
-    isLoggedIn,
-    isRegistered,
+    authStore,
     onLoginSubmit,
     onRegisterSubmit,
   };

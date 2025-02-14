@@ -18,19 +18,29 @@ const LoginForm: React.FC = () => {
     resolver: zodResolver(loginFormSchema),
     defaultValues,
   });
-  const navigate = useNavigate();
-  const { onLoginSubmit, error, isLoading } = useAuth();
 
-  const onSubmit = (data: LoginSchema) => {
-    onLoginSubmit(data).then((data) => {
-      if (data.type.endsWith("fulfilled")) {
+  const navigate = useNavigate();
+
+  const {
+    onLoginSubmit,
+    authStore: { isLoading, error },
+  } = useAuth();
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const action = await onLoginSubmit(data);
+
+      if (action.type.endsWith("fulfilled")) {
+        // console.log(action);
         navigate(RoutesEnum.Home);
       }
-    });
-  };
+    } catch {
+      // ошибка обработана в санке
+    }
+  });
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={onSubmit}>
       <Input
         {...register("username")}
         label="Username"
