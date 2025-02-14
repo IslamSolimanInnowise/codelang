@@ -54,10 +54,13 @@ export const loginUser = createAsyncThunk<
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {
-      // console.log(error);
       return thunkApi.rejectWithValue(error?.response?.data.message);
+      //  thunkApi.rejectWithValue(error?.response?.data.message);
+      // throw error.response?.data.message;
     } else if (error instanceof Error) {
       return thunkApi.rejectWithValue(error.message);
+      //  thunkApi.rejectWithValue(error.message);
+      // throw error.message;
     }
   }
 });
@@ -91,6 +94,7 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload!;
+        // console.log(state.error);
       });
   },
 });

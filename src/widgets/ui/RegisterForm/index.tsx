@@ -27,16 +27,8 @@ const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
-    try {
-      const action = await onRegisterSubmit(data);
-
-      if (action.type.endsWith("fulfilled")) {
-        // console.log(action);
-        navigate(RoutesEnum.Login);
-      }
-    } catch {
-      //ошибка обработана в санке
-    }
+    await onRegisterSubmit(data).unwrap();
+    navigate(RoutesEnum.Login);
   });
 
   return (

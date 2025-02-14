@@ -27,16 +27,8 @@ const LoginForm: React.FC = () => {
   } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
-    try {
-      const action = await onLoginSubmit(data);
-
-      if (action.type.endsWith("fulfilled")) {
-        // console.log(action);
-        navigate(RoutesEnum.Home);
-      }
-    } catch {
-      // ошибка обработана в санке
-    }
+    await onLoginSubmit(data).unwrap();
+    navigate(RoutesEnum.Home);
   });
 
   return (
