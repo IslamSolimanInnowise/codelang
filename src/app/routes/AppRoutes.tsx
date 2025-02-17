@@ -14,15 +14,15 @@ const AppRoutes: React.FC = () => {
       <Route element={<AppLayout />}>
         <Route
           path={RoutesEnum.Home}
-          element={user.id ? <ProfilePage /> : <HomePage />}
+          element={user ? <ProfilePage /> : <HomePage />}
         />
         <Route
           path={RoutesEnum.Register}
-          element={user.id ? <HomePage /> : <RegisterPage />}
+          element={user ? <HomePage /> : <RegisterPage />}
         />
         <Route
           path={RoutesEnum.Login}
-          element={user.id ? <HomePage /> : <LoginPage />}
+          element={user ? <HomePage /> : <LoginPage />}
         />
       </Route>
     </Routes>

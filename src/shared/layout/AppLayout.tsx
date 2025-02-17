@@ -20,7 +20,7 @@ const AppLayout: React.FC = () => {
         <StyledNavLink to="/">CodeLang</StyledNavLink>
         <nav>
           <StyledNavList>
-            {user.id ? (
+            {user ? (
               <li>
                 <Button variant="outlined">
                   <StyledNavLink to={RoutesEnum.Login}>Logout</StyledNavLink>

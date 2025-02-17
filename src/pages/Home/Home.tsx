@@ -1,6 +1,7 @@
+import onlyPublic from "@widgets/utils/onlyPublic";
 import { DescriptionP, HomeHeading, HomeMain, StrongP } from "./Home.styles";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <HomeMain>
       <HomeHeading>
@@ -17,4 +18,4 @@ const HomePage = () => {
     </HomeMain>
   );
 };
-export default HomePage;
+export default onlyPublic(HomePage);

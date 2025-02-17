@@ -2,8 +2,9 @@ import { AuthMain } from "./Login.styles";
 import LoginForm from "@widgets/ui/LoginForm";
 import { Link } from "react-router";
 import { RoutesEnum } from "@shared/routes";
+import onlyPublic from "@widgets/utils/onlyPublic";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   return (
     <AuthMain>
       <LoginForm />
@@ -12,4 +13,4 @@ const LoginPage = () => {
     </AuthMain>
   );
 };
-export default LoginPage;
+export default onlyPublic(LoginPage);
