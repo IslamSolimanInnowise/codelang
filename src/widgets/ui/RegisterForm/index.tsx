@@ -19,10 +19,7 @@ const RegisterForm: React.FC = () => {
     defaultValues,
   });
 
-  const {
-    authStore: { isLoading, error },
-    onRegisterSubmit,
-  } = useAuth();
+  const { isLoading, error, onRegisterSubmit } = useAuth();
 
   const navigate = useNavigate();
 

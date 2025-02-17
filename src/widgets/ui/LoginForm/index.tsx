@@ -21,10 +21,7 @@ const LoginForm: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const {
-    onLoginSubmit,
-    authStore: { isLoading, error },
-  } = useAuth();
+  const { onLoginSubmit, isLoading, error } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
     await onLoginSubmit(data).unwrap();

@@ -16,7 +16,7 @@ const useAuth = () => {
   };
 
   return {
-    authStore,
+    ...authStore,
     onLoginSubmit,
     onRegisterSubmit,
   };
