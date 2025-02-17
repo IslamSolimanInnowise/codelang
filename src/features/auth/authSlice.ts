@@ -68,7 +68,7 @@ export const getUser = createAsyncThunk<ThunkReturnType, void, ThunkApiType>(
   async (_, thunkApi) => {
     try {
       const { data } = await axiosInstance.get("/me");
-      return data;
+      return data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         return thunkApi.rejectWithValue(error?.response?.data.message);
