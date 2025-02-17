@@ -21,10 +21,11 @@ const LoginForm: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const { onLoginSubmit, isLoading, error } = useAuth();
+  const { onLoginSubmit, onGetUser, isLoading, error } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
     await onLoginSubmit(data).unwrap();
+    await onGetUser().unwrap();
     navigate(RoutesEnum.Home);
   });
 
