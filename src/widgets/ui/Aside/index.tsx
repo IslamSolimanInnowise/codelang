@@ -1,0 +1,19 @@
+import ProfileNav from "@entities/ui/ProfileNav";
+import profileIMG from "@shared/assets/profile.svg";
+import useAuth from "@widgets/hooks/useAuth";
+import { StyledAside } from "./Aside.styles";
+
+const Aside: React.FC = () => {
+  const { user } = useAuth();
+
+  return (
+    <StyledAside>
+      <div className="person">
+        <img src={profileIMG} alt="profile" />
+        <p>{user.username}</p>
+      </div>
+      <ProfileNav />
+    </StyledAside>
+  );
+};
+export default Aside;

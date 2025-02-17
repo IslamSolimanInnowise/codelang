@@ -46,8 +46,12 @@ body{
     color: ${({ theme }) => theme.color};
     transition: 0.3s;
     min-height: 100vh;
-    height: 100%;
+    height: 35rem;
     display: flex;
     flex-direction: column;
+
+    #root{
+        flex-grow: 1;
+    }
 }
 `;
