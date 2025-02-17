@@ -4,8 +4,9 @@ import Input from "@shared/ui/Input/Input";
 import { useForm } from "react-hook-form";
 import { defaultValues, registerFormSchema, RegisterSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { registerUser } from "@features/auth/authSlice";
+import useAuth from "@widgets/hooks/useAuth";
+import { useNavigate } from "react-router";
+import { RoutesEnum } from "@shared/routes";
 
 const RegisterForm: React.FC = () => {
   const {
@@ -18,16 +19,17 @@ const RegisterForm: React.FC = () => {
     defaultValues,
   });
 
-  const { error, isLoading } = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
+  const { isLoading, error, onRegisterSubmit } = useAuth();
 
-  const onSubmit = (data: RegisterSchema) => {
-    // console.log("Form can only be submitted without errors!");
-    dispatch(registerUser(data));
-  };
+  const navigate = useNavigate();
+
+  const onSubmit = handleSubmit(async (data) => {
+    await onRegisterSubmit(data).unwrap();
+    navigate(RoutesEnum.Login);
+  });
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={onSubmit}>
       <Input
         {...register("username")}
         label="Username"
