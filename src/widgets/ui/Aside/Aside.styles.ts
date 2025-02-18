@@ -16,4 +16,5 @@ export const StyledPerson = styled.div`
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  color: ${({ theme }) => theme.backgroundColor};
 `;

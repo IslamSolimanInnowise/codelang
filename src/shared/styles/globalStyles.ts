@@ -45,8 +45,7 @@ body{
     background-color: ${({ theme }) => theme.backgroundColor};
     color: ${({ theme }) => theme.color};
     transition: 0.3s;
-    min-height: 100vh;
-    height: 35rem;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 
