@@ -3,6 +3,7 @@ import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
+import noComments from "eslint-plugin-no-comments";
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -16,6 +17,7 @@ export default tseslint.config(
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      "no-comments": noComments,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -25,6 +27,9 @@ export default tseslint.config(
       ],
       "no-console": "error",
       "no-debugger": "error",
+      "no-inline-comments": "error",
+      "no-warning-comments": "error",
+      "no-comments/disallowComments": "error",
     },
   }
 );
