@@ -6,14 +6,14 @@ export const StyledAside = styled.aside`
   padding: 1rem;
   width: 15rem;
 
-  .person {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
   & img {
     width: 1rem;
   }
+`;
+
+export const StyledPerson = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
 `;
