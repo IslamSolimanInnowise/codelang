@@ -6,6 +6,11 @@ export const ProfileMain = styled.main`
   display: flex;
 `;
 
+export const PageContent = styled.div`
+  width: 100%;
+  padding: 0.5rem;
+`;
+
 export const ProfileHeading = styled.h2`
   font-size: 1.8rem;
 `;

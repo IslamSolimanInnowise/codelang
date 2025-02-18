@@ -1,6 +1,7 @@
 import Aside from "@widgets/ui/Aside";
 import {
   DescriptionP,
+  PageContent,
   ProfileHeading,
   ProfileMain,
   StrongP,
@@ -10,7 +11,7 @@ const ProfilePage: React.FC = () => {
   return (
     <ProfileMain>
       <Aside />
-      <div className="text">
+      <PageContent>
         <ProfileHeading>
           🖥️ Welcome to CodeLang – The Future of Coding Starts Here!
         </ProfileHeading>
@@ -22,7 +23,7 @@ const ProfilePage: React.FC = () => {
           languages, sharpening your coding skills, and staying ahead in the
           tech world.
         </DescriptionP>
-      </div>
+      </PageContent>
     </ProfileMain>
   );
 };
