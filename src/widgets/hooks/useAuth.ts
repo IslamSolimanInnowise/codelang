@@ -1,4 +1,9 @@
-import { getUser, loginUser, registerUser } from "@features/auth/authSlice";
+import {
+  getUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+} from "@features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { LoginSchema } from "@widgets/ui/LoginForm/schema";
 import { RegisterSchema } from "@widgets/ui/RegisterForm/schema";
@@ -24,11 +29,14 @@ const useAuth = () => {
 
   const onGetUser = useCallback(() => dispatch(getUser()), [dispatch]);
 
+  const onLogoutSubmit = useCallback(() => dispatch(logoutUser()), [dispatch]);
+
   return {
     ...authStore,
     onLoginSubmit,
     onRegisterSubmit,
     onGetUser,
+    onLogoutSubmit,
   };
 };
 

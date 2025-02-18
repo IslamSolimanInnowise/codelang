@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import { StyledHeader, StyledNavLink, StyledNavList } from "./appLayout.styles";
 import { Button } from "@mui/material";
 import { switchTheme } from "@features/theme/themeSlice";
@@ -8,10 +8,16 @@ import useAuth from "@widgets/hooks/useAuth";
 
 const AppLayout: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAuth();
+  const { user, onLogoutSubmit } = useAuth();
+  const navigate = useNavigate();
 
   function handleThemeSwitch() {
     dispatch(switchTheme());
+  }
+
+  async function handleLogoutClick() {
+    await onLogoutSubmit().unwrap();
+    navigate(RoutesEnum.Login);
   }
 
   return (
@@ -22,8 +28,8 @@ const AppLayout: React.FC = () => {
           <StyledNavList>
             {user ? (
               <li>
-                <Button variant="outlined">
-                  <StyledNavLink to={RoutesEnum.Login}>Logout</StyledNavLink>
+                <Button variant="outlined" onClick={handleLogoutClick}>
+                  Logout
                 </Button>
               </li>
             ) : (

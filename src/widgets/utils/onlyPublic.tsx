@@ -1,7 +1,8 @@
-import ProfilePage from "@pages/Profile";
+import { RoutesEnum } from "@shared/routes";
 import Spinner from "@shared/ui/Spinner";
 import useAuth from "@widgets/hooks/useAuth";
 import { useEffect } from "react";
+import { Navigate } from "react-router";
 
 const onlyPublic = (Component: React.FC): React.FC => {
   return () => {
@@ -18,7 +19,8 @@ const onlyPublic = (Component: React.FC): React.FC => {
     if (!user) {
       return <Component />;
     }
-    return <ProfilePage />;
+
+    return <Navigate to={RoutesEnum.Profile} />;
   };
 };
 

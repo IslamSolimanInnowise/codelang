@@ -26,7 +26,7 @@ const LoginForm: React.FC = () => {
   const onSubmit = handleSubmit(async (data) => {
     await onLoginSubmit(data).unwrap();
     await onGetUser().unwrap();
-    navigate(RoutesEnum.Home);
+    navigate(RoutesEnum.Profile);
   });
 
   return (

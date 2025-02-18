@@ -75,6 +75,22 @@ export const getUser = createAsyncThunk<ThunkReturnType, void, ThunkApiType>(
   }
 );
 
+export const logoutUser = createAsyncThunk<ThunkReturnType, void, ThunkApiType>(
+  "auth/logout",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.post("/auth/logout");
+      return data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -113,9 +129,20 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.user = action.payload;
-        // console.log(action.payload);
       })
-      .addCase(getUser.rejected, (state, action) => {
+      .addCase(getUser.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+        state.user = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload!;
       });
