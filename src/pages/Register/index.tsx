@@ -2,8 +2,9 @@ import { AuthMain } from "./Register.styles";
 import RegisterForm from "@widgets/ui/RegisterForm";
 import { RoutesEnum } from "@shared/routes";
 import { Link } from "react-router";
+import onlyPublic from "@widgets/utils/onlyPublic";
 
-const RegisterPage = () => {
+const RegisterPage: React.FC = () => {
   return (
     <AuthMain>
       <RegisterForm />
@@ -12,4 +13,4 @@ const RegisterPage = () => {
     </AuthMain>
   );
 };
-export default RegisterPage;
+export default onlyPublic(RegisterPage);

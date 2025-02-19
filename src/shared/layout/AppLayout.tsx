@@ -4,9 +4,11 @@ import { Button } from "@mui/material";
 import { switchTheme } from "@features/theme/themeSlice";
 import { useAppDispatch } from "@shared/hooks";
 import { RoutesEnum } from "@shared/routes";
+import useAuth from "@widgets/hooks/useAuth";
 
 const AppLayout: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { user, onLogoutSubmit } = useAuth();
 
   function handleThemeSwitch() {
     dispatch(switchTheme());
@@ -18,22 +20,28 @@ const AppLayout: React.FC = () => {
         <StyledNavLink to="/">CodeLang</StyledNavLink>
         <nav>
           <StyledNavList>
-            <li>
-              <Button variant="outlined">
-                <StyledNavLink to={RoutesEnum.Login}>Logout</StyledNavLink>
-              </Button>
-            </li>
-
-            <li>
-              <Button variant="outlined">
-                <StyledNavLink to={RoutesEnum.Register}>Register</StyledNavLink>
-              </Button>
-            </li>
-            <li>
-              <Button variant="outlined">
-                <StyledNavLink to={RoutesEnum.Login}>Sign in</StyledNavLink>
-              </Button>
-            </li>
+            {user ? (
+              <li>
+                <Button variant="outlined" onClick={onLogoutSubmit}>
+                  Logout
+                </Button>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Button variant="outlined">
+                    <StyledNavLink to={RoutesEnum.Register}>
+                      Register
+                    </StyledNavLink>
+                  </Button>
+                </li>
+                <li>
+                  <Button variant="outlined">
+                    <StyledNavLink to={RoutesEnum.Login}>Sign in</StyledNavLink>
+                  </Button>
+                </li>
+              </>
+            )}
 
             <li>
               <Button variant="contained" onClick={handleThemeSwitch}>

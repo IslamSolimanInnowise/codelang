@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 interface AuthState {
   isLoading: boolean;
   error: string | null;
+  user: { id: string; username: string; role: string } | null;
 }
 
 interface UserData {
@@ -12,19 +13,16 @@ interface UserData {
   password: string;
 }
 
-interface ThunkReturnType {
-  id: string;
-  username: string;
-  role: string;
-}
+type ThunkReturnType = AuthState["user"];
 
 interface ThunkApiType {
   rejectValue: string | null;
 }
 
 const initialState: AuthState = {
-  isLoading: false,
+  isLoading: true,
   error: null,
+  user: null,
 };
 
 export const registerUser = createAsyncThunk<
@@ -61,6 +59,38 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+export const getUser = createAsyncThunk<ThunkReturnType, void, ThunkApiType>(
+  "auth/getUser",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.get("/me");
+      return data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const logoutUser = createAsyncThunk<ThunkReturnType, void, ThunkApiType>(
+  "auth/logout",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.post("/auth/logout");
+      return data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -88,6 +118,31 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload!;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.user = action.payload;
+      })
+      .addCase(getUser.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+        state.user = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload!;
       });
