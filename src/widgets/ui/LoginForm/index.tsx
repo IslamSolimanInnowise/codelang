@@ -20,7 +20,7 @@ const LoginForm: React.FC = () => {
   const { onLoginSubmit, onGetUser, error } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
-    await onLoginSubmit(data);
+    await onLoginSubmit(data).unwrap();
     await onGetUser();
   });
 

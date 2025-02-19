@@ -1,4 +1,5 @@
 import {
+  deleteUser,
   getUser,
   loginUser,
   logoutUser,
@@ -41,12 +42,15 @@ const useAuth = () => {
     },
     [dispatch]
   );
+
   const onUpdatePassword = useCallback(
     (data: NewPasswordSchema) => {
       return dispatch(updatePassword(data));
     },
     [dispatch]
   );
+
+  const onDeleteUser = useCallback(() => dispatch(deleteUser()), [dispatch]);
 
   return {
     ...authStore,
@@ -56,6 +60,7 @@ const useAuth = () => {
     onLogoutSubmit,
     onUpdateUsername,
     onUpdatePassword,
+    onDeleteUser,
   };
 };
 

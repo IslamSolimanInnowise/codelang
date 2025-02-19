@@ -10,7 +10,7 @@ import logoutIMG from "@shared/assets/out.svg";
 import trashIMG from "@shared/assets/trash.svg";
 
 const AccountDetails: React.FC = () => {
-  const { user, onLogoutSubmit } = useAuth();
+  const { user, onLogoutSubmit, onDeleteUser } = useAuth();
 
   return (
     <AccountDetailsSection>
@@ -22,7 +22,7 @@ const AccountDetails: React.FC = () => {
           <p>Role: {user?.role}</p>
           <ButtonsContainer>
             <img src={logoutIMG} alt="logout icon" onClick={onLogoutSubmit} />
-            <img src={trashIMG} alt="trash icon" />
+            <img src={trashIMG} alt="trash icon" onClick={onDeleteUser} />
           </ButtonsContainer>
         </UserDataDiv>
       </UserDetailsDiv>

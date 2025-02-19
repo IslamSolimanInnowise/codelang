@@ -125,6 +125,22 @@ export const updatePassword = createAsyncThunk<
   }
 });
 
+export const deleteUser = createAsyncThunk<ThunkReturnType, void, ThunkApiType>(
+  "auth/deleteUser",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.delete("/me");
+      return data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -206,6 +222,19 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload!;
         alert(state.error);
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+        state.user = null;
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload!;
       });
   },
 });
