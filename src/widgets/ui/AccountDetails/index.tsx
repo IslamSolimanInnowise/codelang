@@ -8,6 +8,7 @@ import {
 import profileIMG from "@shared/assets/profile.svg";
 import logoutIMG from "@shared/assets/out.svg";
 import trashIMG from "@shared/assets/trash.svg";
+import UserStatistics from "../UserStatistics";
 
 const AccountDetails: React.FC = () => {
   const { user, onLogoutSubmit, onDeleteUser } = useAuth();
@@ -26,6 +27,7 @@ const AccountDetails: React.FC = () => {
           </ButtonsContainer>
         </UserDataDiv>
       </UserDetailsDiv>
+      <UserStatistics />
     </AccountDetailsSection>
   );
 };

@@ -5,7 +5,7 @@ import { AxiosError } from "axios";
 interface AuthState {
   isLoading: boolean;
   error: string | null;
-  user: { id: string; username: string; role: string } | null;
+  user: { id: number; username: string; role: string } | null;
 }
 
 interface UserData {
