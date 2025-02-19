@@ -26,6 +26,7 @@ const NewUsernameForm = () => {
 
   return (
     <StyledForm onSubmit={onSubmit}>
+      <h3>Change your username:</h3>
       <Input
         {...register("username")}
         label="Update Username"

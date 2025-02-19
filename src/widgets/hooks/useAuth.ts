@@ -3,10 +3,12 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  updatePassword,
   updateUsername,
 } from "@features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { LoginSchema } from "@widgets/ui/LoginForm/schema";
+import { NewPasswordSchema } from "@widgets/ui/NewPasswordForm/schema";
 import { NewUsernameSchema } from "@widgets/ui/NewUsernameForm/schema";
 import { RegisterSchema } from "@widgets/ui/RegisterForm/schema";
 import { useCallback } from "react";
@@ -39,6 +41,12 @@ const useAuth = () => {
     },
     [dispatch]
   );
+  const onUpdatePassword = useCallback(
+    (data: NewPasswordSchema) => {
+      return dispatch(updatePassword(data));
+    },
+    [dispatch]
+  );
 
   return {
     ...authStore,
@@ -47,6 +55,7 @@ const useAuth = () => {
     onGetUser,
     onLogoutSubmit,
     onUpdateUsername,
+    onUpdatePassword,
   };
 };
 

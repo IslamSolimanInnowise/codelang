@@ -9,6 +9,7 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  justify-content: space-between;
   gap: 1rem;
   border: 1px solid
     ${({ theme }) =>
