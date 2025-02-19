@@ -17,7 +17,7 @@ const LoginForm: React.FC = () => {
     defaultValues,
   });
 
-  const { onLoginSubmit, onGetUser, isLoading, error } = useAuth();
+  const { onLoginSubmit, onGetUser, error } = useAuth();
 
   const onSubmit = handleSubmit(async (data) => {
     await onLoginSubmit(data);
@@ -45,8 +45,8 @@ const LoginForm: React.FC = () => {
         error={Boolean(errors.password)}
         helperText={errors.password?.message}
       />
-      <Button variant="contained" type="submit" disabled={isLoading}>
-        {isLoading ? "Logging in..." : "Login"}
+      <Button variant="contained" type="submit">
+        Login
       </Button>
       {error && <div>{error}</div>}
     </StyledForm>

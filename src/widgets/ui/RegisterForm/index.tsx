@@ -19,7 +19,7 @@ const RegisterForm: React.FC = () => {
     defaultValues,
   });
 
-  const { isLoading, error, onRegisterSubmit } = useAuth();
+  const { error, onRegisterSubmit } = useAuth();
 
   const navigate = useNavigate();
 
@@ -60,8 +60,8 @@ const RegisterForm: React.FC = () => {
         error={Boolean(errors.confirmPassword)}
         helperText={errors.confirmPassword?.message}
       />
-      <Button variant="contained" type="submit" disabled={isLoading}>
-        {isLoading ? "Registering..." : "Register"}
+      <Button variant="contained" type="submit">
+        Register
       </Button>
       {error && <div>{error}</div>}
     </StyledForm>
