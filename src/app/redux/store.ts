@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import themeSlice from "@features/theme/themeSlice";
 import authSlice from "@features/auth/authSlice";
 import StatisticsSlice from "@features/statistics/statisticsSlice";
+import snippetsSlice from "@features/snippets/snippetsSlice";
 
 export const store = configureStore({
   reducer: {
     theme: themeSlice,
     auth: authSlice,
     statistics: StatisticsSlice,
+    snippets: snippetsSlice,
   },
 });
 

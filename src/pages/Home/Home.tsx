@@ -1,20 +1,31 @@
 import onlyPublic from "@widgets/utils/onlyPublic";
-import { DescriptionP, HomeHeading, HomeMain, StrongP } from "./Home.styles";
+import { HomeHeading, HomeMain, PostsContainer } from "./Home.styles";
+import { useEffect } from "react";
+import useSnippets from "@widgets/hooks/useSnippets";
+import Spinner from "@shared/ui/Spinner";
+import Post from "@widgets/ui/Post";
 
 const HomePage: React.FC = () => {
+  const { getUsersSnippets, isSnippetsLoading, postData } = useSnippets();
+
+  useEffect(() => {
+    getUsersSnippets();
+  }, []);
+
+  if (isSnippetsLoading) {
+    return <Spinner />;
+  }
+
   return (
     <HomeMain>
       <HomeHeading>
         🖥️ Welcome to CodeLang – The Future of Coding Starts Here!
       </HomeHeading>
-      <StrongP>
-        <strong>🚀 Learn. Build. Innovate.</strong>
-      </StrongP>
-      <DescriptionP>
-        CodeLang is your all-in-one platform for mastering programming
-        languages, sharpening your coding skills, and staying ahead in the tech
-        world.
-      </DescriptionP>
+      <PostsContainer>
+        {postData.map((post) => {
+          return <Post key={post.id} {...post} />;
+        })}
+      </PostsContainer>
     </HomeMain>
   );
 };

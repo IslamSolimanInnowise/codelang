@@ -8,16 +8,11 @@ export const HomeMain = styled.main`
 
 export const HomeHeading = styled.h2`
   font-size: 1.8rem;
+  margin-bottom: 2rem;
 `;
 
-export const StrongP = styled.p`
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin: 2rem auto;
-`;
-
-export const DescriptionP = styled.p`
-  max-width: 50rem;
-  margin: auto;
-  font-size: 1.2rem;
+export const PostsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 `;
