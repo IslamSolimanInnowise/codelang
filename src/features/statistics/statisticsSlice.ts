@@ -36,7 +36,16 @@ export const getStatistics = createAsyncThunk<
   }
 });
 
-const initialState: ApiResponse = { statistic: null };
+type StatisticsState = ApiResponse & {
+  isStatisticsLoading: boolean;
+  data: string[];
+};
+
+const initialState: StatisticsState = {
+  statistic: null,
+  isStatisticsLoading: false,
+  data: [],
+};
 
 const statisticsSlice = createSlice({
   name: "statistics",
@@ -45,13 +54,21 @@ const statisticsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getStatistics.pending, (state) => {
+        state.isStatisticsLoading = true;
         state.statistic = null;
+        state.data = [];
       })
       .addCase(getStatistics.fulfilled, (state, action) => {
+        state.isStatisticsLoading = false;
         state.statistic = action.payload;
+        state.data = Object.entries(action.payload!).map((stat) => {
+          return `${stat[0]}: ${stat[1]}`;
+        });
       })
       .addCase(getStatistics.rejected, (state) => {
+        state.isStatisticsLoading = false;
         state.statistic = null;
+        state.data = [];
       });
   },
 });

@@ -6,7 +6,7 @@ import { UserStatisticsUl } from "./UserStatistics.styles";
 
 const UserStatistics: React.FC = () => {
   const { user } = useAuth();
-  const { statistic, onGetStatistics } = useStatistics();
+  const { onGetStatistics, data, isStatisticsLoading } = useStatistics();
 
   useEffect(() => {
     if (user) {
@@ -14,18 +14,14 @@ const UserStatistics: React.FC = () => {
     }
   }, [user, onGetStatistics]);
 
-  if (!statistic) {
+  if (isStatisticsLoading) {
     return <Spinner />;
   }
 
   return (
     <UserStatisticsUl>
-      {Object.entries(statistic).map((stat) => {
-        return (
-          <li key={stat[0]}>
-            {stat[0]}: {stat[1]}
-          </li>
-        );
+      {data.map((stat) => {
+        return <li key={stat}>{stat}</li>;
       })}
     </UserStatisticsUl>
   );
