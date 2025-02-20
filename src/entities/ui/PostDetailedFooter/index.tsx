@@ -1,31 +1,28 @@
 import commentsIMG from "@shared/assets/comments.svg";
 import likesIMG from "@shared/assets/like.svg";
 import dislikesIMG from "@shared/assets/dislike.svg";
-
 import {
   PostComments,
   PostDislikes,
   PostFooterContainer,
   PostLikes,
   PostMarks,
-} from "./PostFooter.styles";
+} from "./PostDetailedFooter.styles";
 
-interface PostFooterProps {
+interface PostDetailedFooterProps {
   likes: number;
   dislikes: number;
   comments: number;
   onLike: () => void;
   onDislike: () => void;
-  onCommentClick: () => void;
 }
 
-const PostFooter: React.FC<PostFooterProps> = ({
+const PostDetailedFooter: React.FC<PostDetailedFooterProps> = ({
   likes,
   dislikes,
   comments,
   onLike,
   onDislike,
-  onCommentClick,
 }) => {
   return (
     <PostFooterContainer>
@@ -39,11 +36,11 @@ const PostFooter: React.FC<PostFooterProps> = ({
           <img src={dislikesIMG} alt="number of dislikes" />
         </PostDislikes>
       </PostMarks>
-      <PostComments onClick={onCommentClick}>
+      <PostComments>
         <span>{comments}</span>
         <img src={commentsIMG} alt="number of comments" />
       </PostComments>
     </PostFooterContainer>
   );
 };
-export default PostFooter;
+export default PostDetailedFooter;

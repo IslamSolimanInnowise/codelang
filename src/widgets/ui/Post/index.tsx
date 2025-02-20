@@ -3,6 +3,8 @@ import PostFooter from "@entities/ui/PostFooter";
 import PostHeader from "@entities/ui/PostHeader";
 import { PostContainer } from "./Post.styles";
 import useSnippets from "@widgets/hooks/useSnippets";
+import { useNavigate } from "react-router";
+import { RoutesEnum } from "@shared/routes";
 
 interface PostProps {
   id: number;
@@ -23,7 +25,9 @@ const Post: React.FC<PostProps> = ({
   dislikes,
   comments,
 }) => {
-  const { postSnippetsMark, getUsersSnippets } = useSnippets();
+  const { postSnippetsMark, getUsersOneSnippet, getUsersSnippets } =
+    useSnippets();
+  const navigate = useNavigate();
 
   async function handleLike() {
     await postSnippetsMark({ id, mark: "like" });
@@ -33,6 +37,11 @@ const Post: React.FC<PostProps> = ({
   async function handleDislike() {
     await postSnippetsMark({ id, mark: "dislike" });
     await getUsersSnippets();
+  }
+
+  async function handleCommentClick() {
+    await getUsersOneSnippet(id);
+    navigate(`${RoutesEnum.Snippet}/${id}`);
   }
 
   return (
@@ -45,6 +54,7 @@ const Post: React.FC<PostProps> = ({
         comments={comments}
         onLike={handleLike}
         onDislike={handleDislike}
+        onCommentClick={handleCommentClick}
       />
     </PostContainer>
   );

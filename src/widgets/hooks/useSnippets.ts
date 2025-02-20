@@ -1,4 +1,8 @@
-import { getSnippets, markSnippet } from "@features/snippets/snippetsSlice";
+import {
+  getOneSnippet,
+  getSnippets,
+  markSnippet,
+} from "@features/snippets/snippetsSlice";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
 
@@ -17,10 +21,18 @@ const useSnippets = () => {
     [dispatch]
   );
 
+  const getUsersOneSnippet = useCallback(
+    (id: number) => {
+      return dispatch(getOneSnippet(id));
+    },
+    [dispatch]
+  );
+
   return {
     ...snippetsStore,
     getUsersSnippets,
     postSnippetsMark,
+    getUsersOneSnippet,
   };
 };
 
