@@ -14,10 +14,15 @@ const passwordSchema = z
     message: "Password must be longer than or equal to 6 characters",
   });
 
-const loginFormSchema = z.object({
-  username: z.string().nonempty("Username required!").min(minUsernameLength, {
+const usernameSchema = z
+  .string()
+  .nonempty("Username required!")
+  .min(minUsernameLength, {
     message: "Username must be longer than or equal to 5 characters",
-  }),
+  });
+
+const loginFormSchema = z.object({
+  username: usernameSchema,
   password: passwordSchema,
 });
 
@@ -28,4 +33,10 @@ const defaultValues: LoginSchema = {
   password: "",
 };
 
-export { defaultValues, type LoginSchema, loginFormSchema, passwordSchema };
+export {
+  defaultValues,
+  type LoginSchema,
+  loginFormSchema,
+  passwordSchema,
+  usernameSchema,
+};

@@ -6,6 +6,7 @@ import { RoutesEnum } from "@shared/routes";
 import { Routes, Route } from "react-router";
 import PrivateRouter from "./PrivateRouter";
 import ProfilePage from "@pages/Profile";
+import AccountPage from "@pages/Account";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes: React.FC = () => {
         <Route path={RoutesEnum.Login} element={<LoginPage />} />
         <Route element={<PrivateRouter />}>
           <Route path={RoutesEnum.Profile} element={<ProfilePage />} />
+          <Route path={RoutesEnum.Account} element={<AccountPage />} />
         </Route>
       </Route>
     </Routes>

@@ -1,0 +1,17 @@
+import { getStatistics } from "@features/statistics/statisticsSlice";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useCallback } from "react";
+
+const useStatistics = () => {
+  const statisticsStore = useAppSelector((state) => state.statistics);
+  const dispatch = useAppDispatch();
+
+  const onGetStatistics = useCallback(
+    (id: number) => dispatch(getStatistics(id)),
+    [dispatch]
+  );
+
+  return { ...statisticsStore, onGetStatistics };
+};
+
+export default useStatistics;
