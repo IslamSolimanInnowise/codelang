@@ -14,5 +14,6 @@ export const HomeHeading = styled.h2`
 export const PostsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
 `;

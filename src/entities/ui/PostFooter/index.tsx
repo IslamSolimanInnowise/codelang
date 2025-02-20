@@ -14,21 +14,25 @@ interface PostFooterProps {
   likes: number;
   dislikes: number;
   comments: number;
+  onLike: () => void;
+  onDislike: () => void;
 }
 
 const PostFooter: React.FC<PostFooterProps> = ({
   likes,
   dislikes,
   comments,
+  onLike,
+  onDislike,
 }) => {
   return (
     <PostFooterContainer>
       <PostMarks>
-        <PostLikes>
+        <PostLikes onClick={onLike}>
           <span>{likes}</span>
           <img src={likesIMG} alt="number of likes" />
         </PostLikes>
-        <PostDislikes>
+        <PostDislikes onClick={onDislike}>
           <span>{dislikes}</span>
           <img src={dislikesIMG} alt="number of dislikes" />
         </PostDislikes>

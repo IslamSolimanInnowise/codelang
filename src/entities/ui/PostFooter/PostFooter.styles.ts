@@ -32,4 +32,5 @@ export const PostComments = styled.div`
   align-items: center;
   gap: 0.5rem;
   padding-right: 1rem;
+  cursor: pointer;
 `;

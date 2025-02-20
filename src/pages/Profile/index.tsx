@@ -1,28 +1,35 @@
 import Aside from "@widgets/ui/Aside";
 import {
-  DescriptionP,
   PageContent,
+  PostsContainer,
   ProfileHeading,
   ProfileMain,
-  StrongP,
 } from "./Profile.styles";
+import useSnippets from "@widgets/hooks/useSnippets";
+import { useEffect } from "react";
+import Spinner from "@shared/ui/Spinner";
+import Post from "@widgets/ui/Post";
 
 const ProfilePage: React.FC = () => {
+  const { getUsersSnippets, isSnippetsLoading, postData } = useSnippets();
+
+  useEffect(() => {
+    getUsersSnippets();
+  }, [getUsersSnippets]);
+
+  if (isSnippetsLoading) {
+    return <Spinner />;
+  }
   return (
     <ProfileMain>
       <Aside />
       <PageContent>
-        <ProfileHeading>
-          🖥️ Welcome to CodeLang – The Future of Coding Starts Here!
-        </ProfileHeading>
-        <StrongP>
-          <strong>🚀 Learn. Build. Innovate.</strong>
-        </StrongP>
-        <DescriptionP>
-          CodeLang is your all-in-one platform for mastering programming
-          languages, sharpening your coding skills, and staying ahead in the
-          tech world.
-        </DescriptionP>
+        <ProfileHeading>Check out these snippets!</ProfileHeading>
+        <PostsContainer>
+          {postData.map((post) => {
+            return <Post key={post.id} {...post} />;
+          })}
+        </PostsContainer>
       </PageContent>
     </ProfileMain>
   );

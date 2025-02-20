@@ -51,6 +51,24 @@ export const getSnippets = createAsyncThunk<Snippet[], void>(
   }
 );
 
+export const markSnippet = createAsyncThunk<
+  void,
+  { id: number; mark: "like" | "dislike" }
+>("snippets/markSnippet", async (postData, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.post(`/snippets/${postData.id}/mark`, {
+      mark: postData.mark,
+    });
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
+
 const snippetsSlice = createSlice({
   name: "snippets",
   initialState,
@@ -74,11 +92,19 @@ const snippetsSlice = createSlice({
             .length,
           comments: snippet.comments.length,
         }));
-
-        console.log(action.payload, state.postData);
       })
       .addCase(getSnippets.rejected, (state) => {
         state.isSnippetsLoading = false;
+      })
+      .addCase(markSnippet.pending, (state) => {
+        state.isSnippetsLoading = true;
+      })
+      .addCase(markSnippet.fulfilled, (state) => {
+        state.isSnippetsLoading = false;
+      })
+      .addCase(markSnippet.rejected, (state, action) => {
+        state.isSnippetsLoading = false;
+        alert(action.payload);
       });
   },
 });
