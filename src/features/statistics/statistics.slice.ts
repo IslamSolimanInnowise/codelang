@@ -1,23 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
-
-interface ApiResponse {
-  statistic: {
-    snippetsCount: number;
-    rating: number;
-    commentsCount: number;
-    likesCount: number;
-    dislikesCount: number;
-    questionsCount: number;
-    correctAnswersCount: number;
-    regularAnswersCount: number;
-  } | null;
-}
-
-interface ThunkApiType {
-  rejectValue: string | null;
-}
+import { ApiResponse, StatisticsState, ThunkApiType } from "./statistics.types";
 
 export const getStatistics = createAsyncThunk<
   ApiResponse["statistic"],
@@ -36,14 +20,9 @@ export const getStatistics = createAsyncThunk<
   }
 });
 
-type StatisticsState = ApiResponse & {
-  isStatisticsLoading: boolean;
-  data: string[];
-};
-
 const initialState: StatisticsState = {
   statistic: null,
-  isStatisticsLoading: false,
+  isLoading: false,
   data: [],
 };
 
@@ -54,19 +33,19 @@ const statisticsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getStatistics.pending, (state) => {
-        state.isStatisticsLoading = true;
+        state.isLoading = true;
         state.statistic = null;
         state.data = [];
       })
       .addCase(getStatistics.fulfilled, (state, action) => {
-        state.isStatisticsLoading = false;
+        state.isLoading = false;
         state.statistic = action.payload;
         state.data = Object.entries(action.payload!).map((stat) => {
           return `${stat[0]}: ${stat[1]}`;
         });
       })
       .addCase(getStatistics.rejected, (state) => {
-        state.isStatisticsLoading = false;
+        state.isLoading = false;
         state.statistic = null;
         state.data = [];
       });

@@ -1,23 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
-
-interface AuthState {
-  isLoading: boolean;
-  error: string | null;
-  user: { id: number; username: string; role: string } | null;
-}
-
-interface UserData {
-  username: string;
-  password: string;
-}
-
-type ThunkReturnType = AuthState["user"];
-
-interface ThunkApiType {
-  rejectValue: string | null;
-}
+import {
+  AuthState,
+  ThunkApiType,
+  ThunkReturnType,
+  UserData,
+} from "./auth.types";
 
 const initialState: AuthState = {
   isLoading: true,

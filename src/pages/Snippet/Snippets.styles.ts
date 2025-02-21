@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-export const ProfileMain = styled.main`
+export const SnippetMain = styled.main`
   height: 100%;
-  text-align: center;
   display: flex;
   gap: 1rem;
 `;
@@ -10,17 +9,25 @@ export const ProfileMain = styled.main`
 export const PageContent = styled.div`
   width: 100%;
   padding: 1rem;
-`;
-
-export const ProfileHeading = styled.h2`
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 `;
 
 export const PostsContainer = styled.div`
   width: 100%;
+  max-width: 40rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+`;
+
+export const AllPostComments = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
 `;

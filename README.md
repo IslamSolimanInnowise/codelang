@@ -1,22 +1,24 @@
 # codelang
 
-- loading screen (spinner for example) => done
-- private router => in progress => done
-- logout => done
+added:
 
-coming next:
+- posts on the home page when the user isn't logged in
+- post in the profile page after logging in with the ability to like/unlike posts
+- the user can press on the comments button in the post which takes him the specific post page with the according route and request that show the post details
+- the user can see the posts comments on the post page.
 
-1- /me
+upnext:
 
-- add myaccount content with according requests (patch, delete) /me and patch /me/password
+- adding comments
+- editing comments
+- deleting comments
 
-2- /snippets
+later on:
 
-- add posts on home page (without authentication)
+- add snippet page
+- my snippets page
 
-3- /snippets and / comments
+eventually:
 
-- add editable posts on profile page (with authentication)
-
-4- questions
-5- answers
+- questions
+- answers

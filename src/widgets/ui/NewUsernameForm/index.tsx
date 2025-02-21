@@ -3,7 +3,7 @@ import { defaultValues, newUsernameSchema, NewUsernameSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@shared/ui/Input/Input";
 import { Button } from "@mui/material";
-import useAuth from "@widgets/hooks/useAuth";
+import useAuth from "@widgets/hooks/use-auth";
 import { StyledForm } from "./NewUsernameForm.styles";
 
 const NewUsernameForm = () => {
