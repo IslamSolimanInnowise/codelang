@@ -2,17 +2,23 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
 
+interface User {
+  id: number;
+  username: string;
+  role: "user" | "admin";
+}
+
 interface Snippet {
   id: number;
   code: string;
   language: string;
-  user: { id: number; username: string; role: "user" | "admin" };
+  user: User;
   marks: {
     id: number;
     type: "like" | "dislike";
-    user: { id: number; username: string; role: "user" | "admin" };
+    user: User;
   }[];
-  comments: { id: number; content: string }[];
+  comments: { id: number; content: string; user: User }[];
 }
 
 interface SnippetsState {
