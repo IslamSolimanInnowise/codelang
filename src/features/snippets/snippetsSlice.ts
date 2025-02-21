@@ -144,8 +144,6 @@ const snippetsSlice = createSlice({
             .length,
           comments: snippet.comments.length,
         }));
-
-        console.log(state.snippets);
       })
       .addCase(getOneSnippet.rejected, (state) => {
         state.isSnippetsLoading = false;
