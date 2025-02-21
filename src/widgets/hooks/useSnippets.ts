@@ -15,8 +15,8 @@ const useSnippets = () => {
     return dispatch(getSnippets());
   }, [dispatch]);
 
-  const postSnippetsMark = useCallback(
-    <T extends MarkSnippetData>({ id, mark }: T) => {
+  const postSnippetsMark = useCallback<(obj: MarkSnippetData) => void>(
+    ({ id, mark }) => {
       return dispatch(markSnippet({ id, mark }));
     },
     [dispatch]
