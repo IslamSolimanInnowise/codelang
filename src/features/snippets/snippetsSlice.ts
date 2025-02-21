@@ -37,7 +37,7 @@ interface SnippetsState {
   }[];
 }
 
-export interface MarkSnippetData {
+interface MarkSnippetData {
   id: number;
   mark: "like" | "dislike";
 }
