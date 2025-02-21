@@ -1,52 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
-import postDataMapper from "./helper/postDataMapper";
-
-interface User {
-  id: number;
-  username: string;
-  role: "user" | "admin";
-}
-
-export interface Snippet {
-  id: number;
-  code: string;
-  language: string;
-  user: User;
-  marks: {
-    id: number;
-    type: "like" | "dislike";
-    user: User;
-  }[];
-  comments: { id: number; content: string; user: User }[];
-}
-
-interface SnippetsState {
-  snippets: Snippet[];
-  oneSnippet: Snippet | null;
-  isSnippetsLoading: boolean;
-  postData: {
-    id: number;
-    code: string;
-    language: string;
-    creator: string;
-    likes: number;
-    dislikes: number;
-    comments: number;
-  }[];
-}
-
-interface MarkSnippetData {
-  id: number;
-  mark: "like" | "dislike";
-}
+import type { MarkSnippetData, Snippet, SnippetsState } from "./snippets.types";
+import { mapSnippetsToPosts, mapSnippetToPost } from "./snippets.mapper";
 
 const initialState: SnippetsState = {
   snippets: [],
-  oneSnippet: null,
-  isSnippetsLoading: false,
-  postData: [],
+  snippet: null,
+  isLoading: false,
+  posts: [],
+  post: null,
 };
 
 export const getSnippets = createAsyncThunk<Snippet[], void>(
@@ -109,38 +72,38 @@ const snippetsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getSnippets.pending, (state) => {
-        state.isSnippetsLoading = true;
+        state.isLoading = true;
       })
       .addCase(getSnippets.fulfilled, (state, action) => {
-        state.isSnippetsLoading = false;
+        state.isLoading = false;
         state.snippets = action.payload;
-        state.postData = postDataMapper(action.payload);
+        state.posts = mapSnippetsToPosts(action.payload);
       })
       .addCase(getSnippets.rejected, (state) => {
-        state.isSnippetsLoading = false;
+        state.isLoading = false;
       })
       .addCase(markSnippet.pending, (state) => {
-        state.isSnippetsLoading = true;
+        state.isLoading = true;
       })
       .addCase(markSnippet.fulfilled, (state) => {
-        state.isSnippetsLoading = false;
+        state.isLoading = false;
       })
       .addCase(markSnippet.rejected, (state, action) => {
-        state.isSnippetsLoading = false;
+        state.isLoading = false;
         alert(action.payload);
       })
       .addCase(getOneSnippet.pending, (state) => {
-        state.isSnippetsLoading = true;
-        state.oneSnippet = null;
+        state.isLoading = true;
+        state.snippet = null;
       })
       .addCase(getOneSnippet.fulfilled, (state, action) => {
-        state.isSnippetsLoading = false;
-        state.oneSnippet = action.payload;
-        state.postData = postDataMapper([action.payload]);
+        state.isLoading = false;
+        state.snippet = action.payload;
+        state.post = mapSnippetToPost(action.payload);
       })
       .addCase(getOneSnippet.rejected, (state) => {
-        state.isSnippetsLoading = false;
-        state.oneSnippet = null;
+        state.isLoading = false;
+        state.snippet = null;
       });
   },
 });

@@ -2,7 +2,7 @@ import PostCode from "@entities/ui/PostCode";
 import PostFooter from "@entities/ui/PostFooter";
 import PostHeader from "@entities/ui/PostHeader";
 import { PostContainer } from "./Post.styles";
-import useSnippets from "@widgets/hooks/useSnippets";
+import useSnippets from "@widgets/hooks/use-snippets";
 import { useNavigate } from "react-router";
 import { RoutesEnum } from "@shared/routes";
 

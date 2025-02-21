@@ -5,7 +5,7 @@ import {
   PostsContainer,
   SnippetMain,
 } from "./Snippets.styles";
-import useSnippets from "@widgets/hooks/useSnippets";
+import useSnippets from "@widgets/hooks/use-snippets";
 import Spinner from "@shared/ui/Spinner";
 import DetailedPost from "@widgets/ui/DetailedPost";
 import { useParams } from "react-router";
@@ -13,8 +13,7 @@ import { useEffect } from "react";
 import Comment from "@entities/ui/Comment";
 
 const SnippetPage: React.FC = () => {
-  const { postData, isSnippetsLoading, getUsersOneSnippet, oneSnippet } =
-    useSnippets();
+  const { post, isLoading, getUsersOneSnippet, snippet } = useSnippets();
   const params = useParams();
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const SnippetPage: React.FC = () => {
     getUsersOneSnippet(numId);
   }, [getUsersOneSnippet, params.id]);
 
-  if (isSnippetsLoading) {
+  if (isLoading) {
     return <Spinner />;
   }
 
@@ -30,14 +29,14 @@ const SnippetPage: React.FC = () => {
     <SnippetMain>
       <Aside />
       <PageContent>
-        <PostsContainer>
-          {postData.map((post) => {
-            return <DetailedPost key={post.id} {...post} />;
-          })}
-        </PostsContainer>
+        {post && (
+          <PostsContainer>
+            <DetailedPost {...post} />
+          </PostsContainer>
+        )}
         <AllPostComments>
-          {oneSnippet &&
-            oneSnippet.comments.map((comment) => {
+          {snippet &&
+            snippet.comments.map((comment) => {
               return <Comment key={comment.id} {...comment} />;
             })}
         </AllPostComments>

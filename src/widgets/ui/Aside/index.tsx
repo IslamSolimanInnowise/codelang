@@ -1,6 +1,6 @@
 import ProfileNav from "@entities/ui/ProfileNav";
 import profileIMG from "@shared/assets/profile.svg";
-import useAuth from "@widgets/hooks/useAuth";
+import useAuth from "@widgets/hooks/use-auth";
 import { StyledAside, StyledPerson } from "./Aside.styles";
 
 const Aside: React.FC = () => {

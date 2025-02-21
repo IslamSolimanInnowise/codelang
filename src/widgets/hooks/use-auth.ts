@@ -6,7 +6,7 @@ import {
   registerUser,
   updatePassword,
   updateUsername,
-} from "@features/auth/authSlice";
+} from "@features/auth/auth.slice";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { LoginSchema } from "@widgets/ui/LoginForm/schema";
 import { NewPasswordSchema } from "@widgets/ui/NewPasswordForm/schema";

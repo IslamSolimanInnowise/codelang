@@ -1,4 +1,4 @@
-import { getStatistics } from "@features/statistics/statisticsSlice";
+import { getStatistics } from "@features/statistics/statistics.slice";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
 

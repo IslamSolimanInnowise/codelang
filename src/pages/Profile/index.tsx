@@ -5,19 +5,19 @@ import {
   ProfileHeading,
   ProfileMain,
 } from "./Profile.styles";
-import useSnippets from "@widgets/hooks/useSnippets";
+import useSnippets from "@widgets/hooks/use-snippets";
 import { useEffect } from "react";
 import Spinner from "@shared/ui/Spinner";
 import Post from "@widgets/ui/Post";
 
 const ProfilePage: React.FC = () => {
-  const { getUsersSnippets, isSnippetsLoading, postData } = useSnippets();
+  const { getUsersSnippets, isLoading, posts } = useSnippets();
 
   useEffect(() => {
     getUsersSnippets();
   }, [getUsersSnippets]);
 
-  if (isSnippetsLoading) {
+  if (isLoading) {
     return <Spinner />;
   }
   return (
@@ -26,7 +26,7 @@ const ProfilePage: React.FC = () => {
       <PageContent>
         <ProfileHeading>Check out these snippets!</ProfileHeading>
         <PostsContainer>
-          {postData.map((post) => {
+          {posts.map((post) => {
             return <Post key={post.id} {...post} />;
           })}
         </PostsContainer>

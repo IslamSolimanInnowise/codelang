@@ -1,18 +1,18 @@
 import onlyPublic from "@widgets/utils/onlyPublic";
 import { HomeHeading, HomeMain, PostsContainer } from "./Home.styles";
 import { useEffect } from "react";
-import useSnippets from "@widgets/hooks/useSnippets";
+import useSnippets from "@widgets/hooks/use-snippets";
 import Spinner from "@shared/ui/Spinner";
 import Post from "@widgets/ui/Post";
 
 const HomePage: React.FC = () => {
-  const { getUsersSnippets, isSnippetsLoading, postData } = useSnippets();
+  const { getUsersSnippets, isLoading, posts } = useSnippets();
 
   useEffect(() => {
     getUsersSnippets();
   }, []);
 
-  if (isSnippetsLoading) {
+  if (isLoading) {
     return <Spinner />;
   }
 
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
         🖥️ Welcome to CodeLang – The Future of Coding Starts Here!
       </HomeHeading>
       <PostsContainer>
-        {postData.map((post) => {
+        {posts.map((post) => {
           return <Post key={post.id} {...post} />;
         })}
       </PostsContainer>

@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeSlice from "@features/theme/themeSlice";
-import authSlice from "@features/auth/authSlice";
-import StatisticsSlice from "@features/statistics/statisticsSlice";
-import snippetsSlice from "@features/snippets/snippetsSlice";
+import themeSlice from "@features/theme/theme.slice";
+import authSlice from "@features/auth/auth.slice";
+import StatisticsSlice from "@features/statistics/statistics.slice";
+import snippetsSlice from "@features/snippets/snippets.slice";
 
 export const store = configureStore({
   reducer: {

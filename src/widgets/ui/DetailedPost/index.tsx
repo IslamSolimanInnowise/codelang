@@ -1,4 +1,4 @@
-import useSnippets from "@widgets/hooks/useSnippets";
+import useSnippets from "@widgets/hooks/use-snippets";
 import { PostContainer } from "./DetailedPost.styles";
 import PostHeader from "@entities/ui/PostHeader";
 import PostCode from "@entities/ui/PostCode";
