@@ -26,14 +26,14 @@ const SnippetPage: React.FC = () => {
     return <Spinner />;
   }
 
-  const post = postData[0];
-
   return (
     <SnippetMain>
       <Aside />
       <PageContent>
         <PostsContainer>
-          <DetailedPost {...post} />
+          {postData.map((post) => {
+            return <DetailedPost key={post.id} {...post} />;
+          })}
         </PostsContainer>
         <AllPostComments>
           {snippets.length > 0 &&
