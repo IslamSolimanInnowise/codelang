@@ -13,5 +13,6 @@ export const CommentContainer = styled.div`
 
   &:hover {
     background-color: whitesmoke;
+    color: black;
   }
 `;

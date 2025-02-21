@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import Comment from "@entities/ui/Comment";
 
 const SnippetPage: React.FC = () => {
-  const { postData, isSnippetsLoading, getUsersOneSnippet, snippets } =
+  const { postData, isSnippetsLoading, getUsersOneSnippet, oneSnippet } =
     useSnippets();
   const params = useParams();
 
@@ -36,8 +36,8 @@ const SnippetPage: React.FC = () => {
           })}
         </PostsContainer>
         <AllPostComments>
-          {snippets.length > 0 &&
-            snippets[0].comments.map((comment) => {
+          {oneSnippet &&
+            oneSnippet.comments.map((comment) => {
               return <Comment key={comment.id} {...comment} />;
             })}
         </AllPostComments>

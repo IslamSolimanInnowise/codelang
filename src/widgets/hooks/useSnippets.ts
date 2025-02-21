@@ -2,6 +2,7 @@ import {
   getOneSnippet,
   getSnippets,
   markSnippet,
+  type MarkSnippetData,
 } from "@features/snippets/snippetsSlice";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
@@ -15,7 +16,7 @@ const useSnippets = () => {
   }, [dispatch]);
 
   const postSnippetsMark = useCallback(
-    ({ id, mark }: { id: number; mark: "like" | "dislike" }) => {
+    <T extends MarkSnippetData>({ id, mark }: T) => {
       return dispatch(markSnippet({ id, mark }));
     },
     [dispatch]

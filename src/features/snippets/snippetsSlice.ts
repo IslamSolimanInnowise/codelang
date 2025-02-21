@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
+import postDataMapper from "./helper/postDataMapper";
 
 interface User {
   id: number;
@@ -8,7 +9,7 @@ interface User {
   role: "user" | "admin";
 }
 
-interface Snippet {
+export interface Snippet {
   id: number;
   code: string;
   language: string;
@@ -23,6 +24,7 @@ interface Snippet {
 
 interface SnippetsState {
   snippets: Snippet[];
+  oneSnippet: Snippet | null;
   isSnippetsLoading: boolean;
   postData: {
     id: number;
@@ -35,8 +37,14 @@ interface SnippetsState {
   }[];
 }
 
+export interface MarkSnippetData {
+  id: number;
+  mark: "like" | "dislike";
+}
+
 const initialState: SnippetsState = {
   snippets: [],
+  oneSnippet: null,
   isSnippetsLoading: false,
   postData: [],
 };
@@ -73,23 +81,26 @@ export const getOneSnippet = createAsyncThunk<Snippet, number>(
   }
 );
 
-export const markSnippet = createAsyncThunk<
-  void,
-  { id: number; mark: "like" | "dislike" }
->("snippets/markSnippet", async (postData, thunkApi) => {
-  try {
-    const { data } = await axiosInstance.post(`/snippets/${postData.id}/mark`, {
-      mark: postData.mark,
-    });
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return thunkApi.rejectWithValue(error?.response?.data.message);
-    } else if (error instanceof Error) {
-      return thunkApi.rejectWithValue(error.message);
+export const markSnippet = createAsyncThunk<void, MarkSnippetData>(
+  "snippets/markSnippet",
+  async (postData, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.post(
+        `/snippets/${postData.id}/mark`,
+        {
+          mark: postData.mark,
+        }
+      );
+      return data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
     }
   }
-});
+);
 
 const snippetsSlice = createSlice({
   name: "snippets",
@@ -103,17 +114,7 @@ const snippetsSlice = createSlice({
       .addCase(getSnippets.fulfilled, (state, action) => {
         state.isSnippetsLoading = false;
         state.snippets = action.payload;
-
-        state.postData = action.payload.map((snippet) => ({
-          id: snippet.id,
-          code: snippet.code,
-          language: snippet.language,
-          creator: snippet.user.username,
-          likes: snippet.marks.filter((mark) => mark.type === "like").length,
-          dislikes: snippet.marks.filter((mark) => mark.type === "dislike")
-            .length,
-          comments: snippet.comments.length,
-        }));
+        state.postData = postDataMapper(action.payload);
       })
       .addCase(getSnippets.rejected, (state) => {
         state.isSnippetsLoading = false;
@@ -130,23 +131,16 @@ const snippetsSlice = createSlice({
       })
       .addCase(getOneSnippet.pending, (state) => {
         state.isSnippetsLoading = true;
+        state.oneSnippet = null;
       })
       .addCase(getOneSnippet.fulfilled, (state, action) => {
         state.isSnippetsLoading = false;
-        state.snippets = [action.payload];
-        state.postData = [action.payload].map((snippet) => ({
-          id: snippet.id,
-          code: snippet.code,
-          language: snippet.language,
-          creator: snippet.user.username,
-          likes: snippet.marks.filter((mark) => mark.type === "like").length,
-          dislikes: snippet.marks.filter((mark) => mark.type === "dislike")
-            .length,
-          comments: snippet.comments.length,
-        }));
+        state.oneSnippet = action.payload;
+        state.postData = postDataMapper([action.payload]);
       })
       .addCase(getOneSnippet.rejected, (state) => {
         state.isSnippetsLoading = false;
+        state.oneSnippet = null;
       });
   },
 });
