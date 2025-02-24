@@ -12,9 +12,13 @@ import { useParams } from "react-router";
 import { useEffect } from "react";
 import Comment from "@widgets/ui/Comment";
 import NewCommentForm from "@widgets/ui/NewCommentForm";
+import useAuth from "@widgets/hooks/use-auth";
+import Post from "@widgets/ui/Post";
 
 const SnippetPage: React.FC = () => {
   const { post, isLoading, getUsersOneSnippet, snippet } = useSnippets();
+  const { user } = useAuth();
+
   const params = useParams();
 
   useEffect(() => {
@@ -32,7 +36,11 @@ const SnippetPage: React.FC = () => {
       <PageContent>
         {post && (
           <PostsContainer>
-            <DetailedPost {...post} />
+            {user?.username === post.creator ? (
+              <Post {...post} />
+            ) : (
+              <DetailedPost {...post} />
+            )}
           </PostsContainer>
         )}
         <NewCommentForm />
