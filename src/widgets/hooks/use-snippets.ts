@@ -1,4 +1,10 @@
 import {
+  closeCommentModal,
+  openCommentModal,
+} from "@features/snippets/snippets.slice";
+import {
+  addComment,
+  deleteComment,
   getOneSnippet,
   getSnippets,
   markSnippet,
@@ -28,11 +34,37 @@ const useSnippets = () => {
     [dispatch]
   );
 
+  const addNewComment = useCallback(
+    (...commentData: Parameters<typeof addComment>) => {
+      return dispatch(addComment(...commentData));
+    },
+    [dispatch]
+  );
+
+  const removeComment = useCallback(
+    (id: Parameters<typeof deleteComment>[0]) => {
+      return dispatch(deleteComment(id));
+    },
+    [dispatch]
+  );
+
+  const openCommentDialog = useCallback(() => {
+    dispatch(openCommentModal());
+  }, [dispatch]);
+
+  const closeCommentDialog = useCallback(() => {
+    dispatch(closeCommentModal());
+  }, [dispatch]);
+
   return {
     ...snippetsStore,
     getUsersSnippets,
     postSnippetsMark,
     getUsersOneSnippet,
+    addNewComment,
+    removeComment,
+    openCommentDialog,
+    closeCommentDialog,
   };
 };
 

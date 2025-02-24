@@ -10,7 +10,8 @@ import Spinner from "@shared/ui/Spinner";
 import DetailedPost from "@widgets/ui/DetailedPost";
 import { useParams } from "react-router";
 import { useEffect } from "react";
-import Comment from "@entities/ui/Comment";
+import Comment from "@widgets/ui/Comment";
+import NewCommentForm from "@widgets/ui/NewCommentForm";
 
 const SnippetPage: React.FC = () => {
   const { post, isLoading, getUsersOneSnippet, snippet } = useSnippets();
@@ -34,10 +35,11 @@ const SnippetPage: React.FC = () => {
             <DetailedPost {...post} />
           </PostsContainer>
         )}
+        <NewCommentForm />
         <AllPostComments>
           {snippet &&
             snippet.comments.map((comment) => {
-              return <Comment key={comment.id} {...comment} />;
+              return <Comment key={comment.id} {...comment} id={comment.id} />;
             })}
         </AllPostComments>
       </PageContent>

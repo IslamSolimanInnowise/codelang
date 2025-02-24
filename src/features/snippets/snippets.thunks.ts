@@ -55,3 +55,35 @@ export const markSnippet = createAsyncThunk<void, MarkSnippetData>(
     }
   }
 );
+
+export const addComment = createAsyncThunk<
+  void,
+  { content: string; snippetId: number }
+>("snippets/addComment", async (commentData, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.post(`/comments`, commentData);
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
+
+export const deleteComment = createAsyncThunk<
+  Snippet["comments"][number],
+  number
+>("snippets/deleteComment", async (id, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.delete(`/comments/${id}`);
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
