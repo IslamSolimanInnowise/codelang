@@ -1,24 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance } from "@shared/api/axios";
-import { AxiosError } from "axios";
-import { ApiResponse, StatisticsState, ThunkApiType } from "./statistics.types";
-
-export const getStatistics = createAsyncThunk<
-  ApiResponse["statistic"],
-  number,
-  ThunkApiType
->("statistics/get", async (userData, thunkApi) => {
-  try {
-    const { data } = await axiosInstance.get(`/users/${userData}/statistic`);
-    return data.data.statistic;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return thunkApi.rejectWithValue(error?.response?.data.message);
-    } else if (error instanceof Error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-});
+import { createSlice } from "@reduxjs/toolkit";
+import { StatisticsState } from "./statistics.types";
 
 const initialState: StatisticsState = {
   statistic: null,

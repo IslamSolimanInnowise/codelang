@@ -1,4 +1,4 @@
-import { getStatistics } from "@features/statistics/statistics.slice";
+import { getStatistics } from "@features/statistics/statistics.thunks";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
 
@@ -7,7 +7,7 @@ const useStatistics = () => {
   const dispatch = useAppDispatch();
 
   const onGetStatistics = useCallback(
-    (id: number) => dispatch(getStatistics(id)),
+    (id: Parameters<typeof getStatistics>[0]) => dispatch(getStatistics(id)),
     [dispatch]
   );
 
