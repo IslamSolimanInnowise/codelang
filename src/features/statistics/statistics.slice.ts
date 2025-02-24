@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StatisticsState } from "./statistics.types";
+import { getStatistics } from "./statistics.thunks";
 
 const initialState: StatisticsState = {
   statistic: null,
