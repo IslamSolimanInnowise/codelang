@@ -3,6 +3,7 @@ import type { SnippetsState } from "./snippets.types";
 import { mapSnippetsToPosts, mapSnippetToPost } from "./snippets.mapper";
 import {
   addComment,
+  addSnippet,
   deleteComment,
   getOneSnippet,
   getSnippets,
@@ -93,6 +94,16 @@ const snippetsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateComment.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
+      })
+      .addCase(addSnippet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addSnippet.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(addSnippet.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
       });

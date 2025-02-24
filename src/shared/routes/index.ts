@@ -5,4 +5,5 @@ export enum RoutesEnum {
   Profile = "/profile",
   Account = "/account",
   Snippet = "/snippet",
+  Add_Snippet = "/add-snippet",
 }

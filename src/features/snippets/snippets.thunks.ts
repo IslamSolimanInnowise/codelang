@@ -106,3 +106,19 @@ export const updateComment = createAsyncThunk<
     }
   }
 });
+
+export const addSnippet = createAsyncThunk<
+  Snippet,
+  { language: string; code: string }
+>("snippets/addSnippet", async (snippetData, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.post("/snippets", snippetData);
+    return data.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});

@@ -4,6 +4,7 @@ import {
 } from "@features/snippets/snippets.slice";
 import {
   addComment,
+  addSnippet,
   deleteComment,
   getOneSnippet,
   getSnippets,
@@ -31,6 +32,13 @@ const useSnippets = () => {
   const getUsersOneSnippet = useCallback(
     (id: Parameters<typeof getOneSnippet>[0]) => {
       return dispatch(getOneSnippet(id));
+    },
+    [dispatch]
+  );
+
+  const addNewSnippet = useCallback(
+    (...snippet: Parameters<typeof addSnippet>) => {
+      return dispatch(addSnippet(...snippet));
     },
     [dispatch]
   );
@@ -69,6 +77,7 @@ const useSnippets = () => {
     getUsersSnippets,
     postSnippetsMark,
     getUsersOneSnippet,
+    addNewSnippet,
     addNewComment,
     removeComment,
     editComment,
