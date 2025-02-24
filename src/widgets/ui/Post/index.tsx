@@ -30,8 +30,8 @@ const Post: React.FC<PostProps> = ({
 }) => {
   const {
     postSnippetsMark,
-    getUsersOneSnippet,
-    getUsersSnippets,
+    getSnippet,
+    getAllSnippets,
     getMyPosts,
     removeSnippet,
     openDialog,
@@ -49,7 +49,7 @@ const Post: React.FC<PostProps> = ({
       return;
     }
 
-    await getUsersSnippets();
+    await getAllSnippets();
   }
 
   async function handleDislike() {
@@ -60,11 +60,11 @@ const Post: React.FC<PostProps> = ({
       return;
     }
 
-    await getUsersSnippets();
+    await getAllSnippets();
   }
 
   async function handleCommentClick() {
-    await getUsersOneSnippet(id);
+    await getSnippet(id);
     navigate(`${RoutesEnum.Snippet}/${id}`);
   }
 

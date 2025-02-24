@@ -6,10 +6,10 @@ import Spinner from "@shared/ui/Spinner";
 import Post from "@widgets/ui/Post";
 
 const HomePage: React.FC = () => {
-  const { getUsersSnippets, isLoading, posts } = useSnippets();
+  const { getAllSnippets, isLoading, posts } = useSnippets();
 
   useEffect(() => {
-    getUsersSnippets();
+    getAllSnippets();
   }, []);
 
   if (isLoading) {

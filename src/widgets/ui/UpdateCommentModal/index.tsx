@@ -29,11 +29,11 @@ const UpdateCommentModal: React.FC<UpdateCommentProps> = ({
     defaultValues,
   });
 
-  const { editComment, getUsersOneSnippet, snippet } = useSnippets();
+  const { editComment, getSnippet, snippet } = useSnippets();
 
   const onSubmit = handleSubmit(async (data) => {
     await editComment({ ...data, id: commentId });
-    await getUsersOneSnippet(snippet!.id);
+    await getSnippet(snippet!.id);
     onClose();
   });
 

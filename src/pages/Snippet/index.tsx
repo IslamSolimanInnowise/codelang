@@ -7,24 +7,21 @@ import {
 } from "./Snippets.styles";
 import useSnippets from "@widgets/hooks/use-snippets";
 import Spinner from "@shared/ui/Spinner";
-import DetailedPost from "@widgets/ui/DetailedPost";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import Comment from "@widgets/ui/Comment";
 import NewCommentForm from "@widgets/ui/NewCommentForm";
-import useAuth from "@widgets/hooks/use-auth";
 import Post from "@widgets/ui/Post";
 
 const SnippetPage: React.FC = () => {
-  const { post, isLoading, getUsersOneSnippet, snippet } = useSnippets();
-  const { user } = useAuth();
+  const { post, isLoading, getSnippet, snippet } = useSnippets();
 
   const params = useParams();
 
   useEffect(() => {
     const numId = Number(params.id);
-    getUsersOneSnippet(numId);
-  }, [getUsersOneSnippet, params.id]);
+    getSnippet(numId);
+  }, [getSnippet, params.id]);
 
   if (isLoading) {
     return <Spinner />;
@@ -36,11 +33,7 @@ const SnippetPage: React.FC = () => {
       <PageContent>
         {post && (
           <PostsContainer>
-            {user?.username === post.creator ? (
-              <Post {...post} />
-            ) : (
-              <DetailedPost {...post} />
-            )}
+            <Post {...post} />
           </PostsContainer>
         )}
         <NewCommentForm />

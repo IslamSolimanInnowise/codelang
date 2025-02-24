@@ -12,18 +12,12 @@ interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({ content, user, id }) => {
   const { user: authUser } = useAuth();
-  const {
-    removeComment,
-    openDialog,
-    closeDialog,
-    getUsersOneSnippet,
-    snippet,
-    modal,
-  } = useSnippets();
+  const { removeComment, openDialog, closeDialog, getSnippet, snippet, modal } =
+    useSnippets();
 
   const deleteComment = async () => {
     await removeComment(id);
-    await getUsersOneSnippet(snippet!.id);
+    await getSnippet(snippet!.id);
   };
 
   return (

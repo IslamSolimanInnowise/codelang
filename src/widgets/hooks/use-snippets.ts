@@ -18,7 +18,7 @@ const useSnippets = () => {
   const snippetsStore = useAppSelector((state) => state.snippets);
   const dispatch = useAppDispatch();
 
-  const getUsersSnippets = useCallback(() => {
+  const getAllSnippets = useCallback(() => {
     return dispatch(getSnippets());
   }, [dispatch]);
 
@@ -36,7 +36,7 @@ const useSnippets = () => {
     [dispatch]
   );
 
-  const getUsersOneSnippet = useCallback(
+  const getSnippet = useCallback(
     (id: Parameters<typeof getOneSnippet>[0]) => {
       return dispatch(getOneSnippet(id));
     },
@@ -95,10 +95,10 @@ const useSnippets = () => {
 
   return {
     ...snippetsStore,
-    getUsersSnippets,
+    getAllSnippets,
     getMyPosts,
     postSnippetsMark,
-    getUsersOneSnippet,
+    getSnippet,
     addNewSnippet,
     removeSnippet,
     addNewComment,

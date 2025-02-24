@@ -11,11 +11,11 @@ import Spinner from "@shared/ui/Spinner";
 import Post from "@widgets/ui/Post";
 
 const ProfilePage: React.FC = () => {
-  const { getUsersSnippets, isLoading, posts } = useSnippets();
+  const { getAllSnippets, isLoading, posts } = useSnippets();
 
   useEffect(() => {
-    getUsersSnippets();
-  }, [getUsersSnippets]);
+    getAllSnippets();
+  }, [getAllSnippets]);
 
   if (isLoading) {
     return <Spinner />;

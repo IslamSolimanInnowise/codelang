@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import useSnippets from "@widgets/hooks/use-snippets";
 
 const NewCommentForm: React.FC = () => {
-  const { addNewComment, snippet, getUsersOneSnippet } = useSnippets();
+  const { addNewComment, snippet, getSnippet } = useSnippets();
 
   const {
     register,
@@ -21,7 +21,7 @@ const NewCommentForm: React.FC = () => {
 
   const onSubmit = handleSubmit(async ({ content }) => {
     await addNewComment({ content, snippetId: snippet!.id });
-    await getUsersOneSnippet(snippet!.id);
+    await getSnippet(snippet!.id);
   });
 
   return (
