@@ -6,6 +6,7 @@ import {
   addComment,
   addSnippet,
   deleteComment,
+  getMySnippets,
   getOneSnippet,
   getSnippets,
   markSnippet,
@@ -21,6 +22,13 @@ const useSnippets = () => {
   const getUsersSnippets = useCallback(() => {
     return dispatch(getSnippets());
   }, [dispatch]);
+
+  const getMyPosts = useCallback(
+    (...data: Parameters<typeof getMySnippets>) => {
+      return dispatch(getMySnippets(...data));
+    },
+    [dispatch]
+  );
 
   const postSnippetsMark = useCallback(
     (...data: Parameters<typeof markSnippet>) => {
@@ -75,6 +83,7 @@ const useSnippets = () => {
   return {
     ...snippetsStore,
     getUsersSnippets,
+    getMyPosts,
     postSnippetsMark,
     getUsersOneSnippet,
     addNewSnippet,

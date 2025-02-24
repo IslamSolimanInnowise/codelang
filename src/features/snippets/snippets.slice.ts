@@ -5,6 +5,7 @@ import {
   addComment,
   addSnippet,
   deleteComment,
+  getMySnippets,
   getOneSnippet,
   getSnippets,
   markSnippet,
@@ -42,6 +43,17 @@ const snippetsSlice = createSlice({
         state.posts = mapSnippetsToPosts(action.payload);
       })
       .addCase(getSnippets.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getMySnippets.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getMySnippets.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.snippets = action.payload;
+        state.posts = mapSnippetsToPosts(action.payload);
+      })
+      .addCase(getMySnippets.rejected, (state) => {
         state.isLoading = false;
       })
       .addCase(markSnippet.pending, (state) => {

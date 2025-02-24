@@ -19,6 +19,22 @@ export const getSnippets = createAsyncThunk<Snippet[], void>(
   }
 );
 
+export const getMySnippets = createAsyncThunk<Snippet[], number>(
+  "snippets/getMySnippets",
+  async (id, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.get(`/snippets?userId=${id}`);
+      return data.data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export const getOneSnippet = createAsyncThunk<Snippet, number>(
   "snippets/getOneSnippet",
   async (id, thunkApi) => {
