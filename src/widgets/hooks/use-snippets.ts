@@ -1,16 +1,15 @@
-import {
-  closeCommentModal,
-  openCommentModal,
-} from "@features/snippets/snippets.slice";
+import { closeModal, openModal } from "@features/snippets/snippets.slice";
 import {
   addComment,
   addSnippet,
   deleteComment,
+  deleteSnippet,
   getMySnippets,
   getOneSnippet,
   getSnippets,
   markSnippet,
   updateComment,
+  updateSnippet,
 } from "@features/snippets/snippets.thunks";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
@@ -51,6 +50,20 @@ const useSnippets = () => {
     [dispatch]
   );
 
+  const removeSnippet = useCallback(
+    (id: Parameters<typeof deleteComment>[0]) => {
+      return dispatch(deleteSnippet(id));
+    },
+    [dispatch]
+  );
+
+  const editSnippet = useCallback(
+    (...snippet: Parameters<typeof updateSnippet>) => {
+      return dispatch(updateSnippet(...snippet));
+    },
+    [dispatch]
+  );
+
   const addNewComment = useCallback(
     (...commentData: Parameters<typeof addComment>) => {
       return dispatch(addComment(...commentData));
@@ -72,12 +85,12 @@ const useSnippets = () => {
     [dispatch]
   );
 
-  const openCommentDialog = useCallback(() => {
-    dispatch(openCommentModal());
+  const openDialog = useCallback(() => {
+    dispatch(openModal());
   }, [dispatch]);
 
-  const closeCommentDialog = useCallback(() => {
-    dispatch(closeCommentModal());
+  const closeDialog = useCallback(() => {
+    dispatch(closeModal());
   }, [dispatch]);
 
   return {
@@ -87,11 +100,13 @@ const useSnippets = () => {
     postSnippetsMark,
     getUsersOneSnippet,
     addNewSnippet,
+    removeSnippet,
     addNewComment,
     removeComment,
+    editSnippet,
     editComment,
-    openCommentDialog,
-    closeCommentDialog,
+    openDialog,
+    closeDialog,
   };
 };
 

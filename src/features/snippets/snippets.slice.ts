@@ -5,11 +5,13 @@ import {
   addComment,
   addSnippet,
   deleteComment,
+  deleteSnippet,
   getMySnippets,
   getOneSnippet,
   getSnippets,
   markSnippet,
   updateComment,
+  updateSnippet,
 } from "./snippets.thunks";
 
 const initialState: SnippetsState = {
@@ -18,18 +20,18 @@ const initialState: SnippetsState = {
   isLoading: false,
   posts: [],
   post: null,
-  commentModal: { isOpen: false },
+  modal: { isOpen: false },
 };
 
 const snippetsSlice = createSlice({
   name: "snippets",
   initialState,
   reducers: {
-    openCommentModal(state) {
-      state.commentModal.isOpen = true;
+    openModal(state) {
+      state.modal.isOpen = true;
     },
-    closeCommentModal(state) {
-      state.commentModal.isOpen = false;
+    closeModal(state) {
+      state.modal.isOpen = false;
     },
   },
   extraReducers(builder) {
@@ -118,9 +120,29 @@ const snippetsSlice = createSlice({
       .addCase(addSnippet.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
+      })
+      .addCase(deleteSnippet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteSnippet.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteSnippet.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
+      })
+      .addCase(updateSnippet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateSnippet.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(updateSnippet.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
       });
   },
 });
 
 export default snippetsSlice.reducer;
-export const { openCommentModal, closeCommentModal } = snippetsSlice.actions;
+export const { openModal, closeModal } = snippetsSlice.actions;

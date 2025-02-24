@@ -138,3 +138,38 @@ export const addSnippet = createAsyncThunk<
     }
   }
 });
+
+export const deleteSnippet = createAsyncThunk<Snippet, number>(
+  "snippets/deleteSnippet",
+  async (id, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.delete(`/snippets/${id}`);
+      return data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const updateSnippet = createAsyncThunk<
+  { updateCount: number },
+  { id: number; language: string; code: string }
+>("snippets/updateSnippet", async (snippetData, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/snippets/${snippetData.id}`,
+      snippetData
+    );
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});

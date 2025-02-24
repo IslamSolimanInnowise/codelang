@@ -31,3 +31,13 @@ export const AllPostComments = styled.div`
   gap: 1rem;
   text-align: left;
 `;
+
+export const PostsButtonsContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: whitesmoke;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+`;
