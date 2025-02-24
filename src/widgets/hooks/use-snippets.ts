@@ -8,6 +8,7 @@ import {
   getOneSnippet,
   getSnippets,
   markSnippet,
+  updateComment,
 } from "@features/snippets/snippets.thunks";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
@@ -48,6 +49,13 @@ const useSnippets = () => {
     [dispatch]
   );
 
+  const editComment = useCallback(
+    (...commentData: Parameters<typeof updateComment>) => {
+      return dispatch(updateComment(...commentData));
+    },
+    [dispatch]
+  );
+
   const openCommentDialog = useCallback(() => {
     dispatch(openCommentModal());
   }, [dispatch]);
@@ -63,6 +71,7 @@ const useSnippets = () => {
     getUsersOneSnippet,
     addNewComment,
     removeComment,
+    editComment,
     openCommentDialog,
     closeCommentDialog,
   };

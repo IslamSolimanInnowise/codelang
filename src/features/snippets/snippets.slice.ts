@@ -7,6 +7,7 @@ import {
   getOneSnippet,
   getSnippets,
   markSnippet,
+  updateComment,
 } from "./snippets.thunks";
 
 const initialState: SnippetsState = {
@@ -82,6 +83,16 @@ const snippetsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteComment.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
+      })
+      .addCase(updateComment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateComment.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(updateComment.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
       });

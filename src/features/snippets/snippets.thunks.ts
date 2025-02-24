@@ -87,3 +87,22 @@ export const deleteComment = createAsyncThunk<
     }
   }
 });
+
+export const updateComment = createAsyncThunk<
+  { updatedCount: number },
+  { id: number; content: string }
+>("snippets/updateComment", async (commentData, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/comments/${commentData.id}`,
+      commentData
+    );
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
