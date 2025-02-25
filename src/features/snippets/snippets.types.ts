@@ -27,6 +27,8 @@ export interface SnippetsState {
   isPostModalOpen: boolean;
   totalPages: number;
   currentPage: number;
+  mySnippetsTotalPages: number;
+  mySnippetsCurrentPage: number;
 }
 
 export interface Post {

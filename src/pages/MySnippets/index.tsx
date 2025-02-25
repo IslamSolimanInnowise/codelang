@@ -8,20 +8,33 @@ import {
   MySnippetsMain,
   PageContent,
   PostsContainer,
+  StyledPagination,
 } from "./MySnippets.styles";
 import useAuth from "@widgets/hooks/use-auth";
 
 const MySnippetsPage: React.FC = () => {
-  const { getMyPosts, isLoading, posts } = useSnippets();
+  const {
+    getMyPosts,
+    isLoading,
+    posts,
+    mySnippetsCurrentPage,
+    changeMyPage,
+    mySnippetsTotalPages,
+  } = useSnippets();
   const { user } = useAuth();
 
   useEffect(() => {
-    getMyPosts(user!.id);
-  }, [getMyPosts, user]);
+    getMyPosts({ userId: user!.id, page: mySnippetsCurrentPage });
+  }, [getMyPosts, user, mySnippetsCurrentPage]);
 
   if (isLoading) {
     return <Spinner />;
   }
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
+    changeMyPage(page);
+  };
+
   return (
     <MySnippetsMain>
       <Aside />
@@ -32,6 +45,11 @@ const MySnippetsPage: React.FC = () => {
             return <Post key={post.id} {...post} />;
           })}
         </PostsContainer>
+        <StyledPagination
+          count={mySnippetsTotalPages}
+          page={mySnippetsCurrentPage}
+          onChange={handlePageChange}
+        />
       </PageContent>
     </MySnippetsMain>
   );

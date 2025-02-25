@@ -4,6 +4,7 @@ import {
   openCommentModal,
   openPostModal,
   setCurrentPage,
+  setMyCurrentPage,
 } from "@features/snippets/snippets.slice";
 import {
   addComment,
@@ -116,6 +117,12 @@ const useSnippets = () => {
     },
     [dispatch]
   );
+  const changeMyPage = useCallback(
+    (...data: Parameters<typeof setMyCurrentPage>) => {
+      dispatch(setMyCurrentPage(...data));
+    },
+    [dispatch]
+  );
 
   return {
     ...snippetsStore,
@@ -134,6 +141,7 @@ const useSnippets = () => {
     openPostDialog,
     closePostDialog,
     changePage,
+    changeMyPage,
   };
 };
 

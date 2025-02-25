@@ -21,21 +21,23 @@ export const getSnippets = createAsyncThunk<
   }
 });
 
-export const getMySnippets = createAsyncThunk<Snippet[], number>(
-  "snippets/getMySnippets",
-  async (id, thunkApi) => {
-    try {
-      const { data } = await axiosInstance.get(`/snippets?userId=${id}`);
-      return data.data.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return thunkApi.rejectWithValue(error?.response?.data.message);
-      } else if (error instanceof Error) {
-        return thunkApi.rejectWithValue(error.message);
-      }
+export const getMySnippets = createAsyncThunk<
+  { data: Snippet[]; meta: { totalPages: number; currentPage: number } },
+  { userId: number; page: number }
+>("snippets/getMySnippets", async (reqData, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/snippets?userId=${reqData.userId}&limit=5&page=${reqData.page}`
+    );
+    return data.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
     }
   }
-);
+});
 
 export const getOneSnippet = createAsyncThunk<Snippet, number>(
   "snippets/getOneSnippet",

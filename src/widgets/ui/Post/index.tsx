@@ -38,6 +38,7 @@ const Post: React.FC<PostProps> = ({
     closePostDialog,
     isPostModalOpen,
     currentPage,
+    mySnippetsCurrentPage,
   } = useSnippets();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Post: React.FC<PostProps> = ({
     await postSnippetsMark({ id, mark: "like" });
 
     if (user?.username === creator) {
-      await getMyPosts(user.id);
+      await getMyPosts({ userId: user.id, page: mySnippetsCurrentPage });
       return;
     }
 
@@ -57,7 +58,7 @@ const Post: React.FC<PostProps> = ({
     await postSnippetsMark({ id, mark: "dislike" });
 
     if (user?.username === creator) {
-      await getMyPosts(user.id);
+      await getMyPosts({ userId: user.id, page: mySnippetsCurrentPage });
       return;
     }
 
@@ -71,7 +72,7 @@ const Post: React.FC<PostProps> = ({
 
   async function handleDeletePost() {
     await removeSnippet(id);
-    await getMyPosts(user!.id);
+    await getMyPosts({ userId: user!.id, page: mySnippetsCurrentPage });
   }
 
   return (

@@ -1,3 +1,4 @@
+import { Pagination } from "@mui/material";
 import styled from "styled-components";
 
 export const HomeMain = styled.main`
@@ -16,4 +17,9 @@ export const PostsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+`;
+
+export const StyledHomePagination = styled(Pagination)`
+  width: 300px;
+  margin: 3rem auto;
 `;
