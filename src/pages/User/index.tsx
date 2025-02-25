@@ -22,8 +22,12 @@ const UserPage: React.FC = () => {
     <PageMain>
       <Aside />
       <PageContent>
-        <UserHeading>These are {user?.username}'s details:</UserHeading>
-        <UserStatistics id={user!.id} />
+        {user && (
+          <>
+            <UserHeading>These are {user.username}'s details:</UserHeading>
+            <UserStatistics id={user.id} />
+          </>
+        )}
       </PageContent>
     </PageMain>
   );
