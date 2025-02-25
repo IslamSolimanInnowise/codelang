@@ -7,6 +7,9 @@ import { Routes, Route } from "react-router";
 import PrivateRouter from "./PrivateRouter";
 import ProfilePage from "@pages/Profile";
 import AccountPage from "@pages/Account";
+import SnippetPage from "@pages/Snippet";
+import AddSnippetPage from "@pages/AddSnippet";
+import MySnippetsPage from "@pages/MySnippets";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -18,6 +21,9 @@ const AppRoutes: React.FC = () => {
         <Route element={<PrivateRouter />}>
           <Route path={RoutesEnum.Profile} element={<ProfilePage />} />
           <Route path={RoutesEnum.Account} element={<AccountPage />} />
+          <Route path={`${RoutesEnum.Snippet}/:id`} element={<SnippetPage />} />
+          <Route path={RoutesEnum.AddSnippet} element={<AddSnippetPage />} />
+          <Route path={RoutesEnum.MySnippets} element={<MySnippetsPage />} />
         </Route>
       </Route>
     </Routes>

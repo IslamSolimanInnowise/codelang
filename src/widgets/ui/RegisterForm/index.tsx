@@ -4,7 +4,7 @@ import Input from "@shared/ui/Input/Input";
 import { useForm } from "react-hook-form";
 import { defaultValues, registerFormSchema, RegisterSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useAuth from "@widgets/hooks/useAuth";
+import useAuth from "@widgets/hooks/use-auth";
 import { useNavigate } from "react-router";
 import { RoutesEnum } from "@shared/routes";
 

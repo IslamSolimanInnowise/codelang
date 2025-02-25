@@ -1,10 +1,10 @@
 import { Outlet } from "react-router";
 import { StyledHeader, StyledNavLink, StyledNavList } from "./appLayout.styles";
 import { Button } from "@mui/material";
-import { switchTheme } from "@features/theme/themeSlice";
+import { switchTheme } from "@features/theme/theme.slice";
 import { useAppDispatch } from "@shared/hooks";
 import { RoutesEnum } from "@shared/routes";
-import useAuth from "@widgets/hooks/useAuth";
+import useAuth from "@widgets/hooks/use-auth";
 
 const AppLayout: React.FC = () => {
   const dispatch = useAppDispatch();

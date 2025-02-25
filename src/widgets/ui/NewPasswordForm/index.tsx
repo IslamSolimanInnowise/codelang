@@ -1,4 +1,4 @@
-import useAuth from "@widgets/hooks/useAuth";
+import useAuth from "@widgets/hooks/use-auth";
 import { useForm } from "react-hook-form";
 import { defaultValues, newPasswordSchema, NewPasswordSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -1,4 +1,4 @@
-import useAuth from "@widgets/hooks/useAuth";
+import useAuth from "@widgets/hooks/use-auth";
 import {
   AccountDetailsSection,
   ButtonsContainer,

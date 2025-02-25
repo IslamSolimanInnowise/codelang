@@ -5,7 +5,7 @@ import {
   UserNameSpan,
   UpdateAccountForms,
 } from "./Account.styles";
-import useAuth from "@widgets/hooks/useAuth";
+import useAuth from "@widgets/hooks/use-auth";
 import AccountDetails from "@widgets/ui/AccountDetails";
 import NewUsernameForm from "@widgets/ui/NewUsernameForm";
 import NewPasswordForm from "@widgets/ui/NewPasswordForm";

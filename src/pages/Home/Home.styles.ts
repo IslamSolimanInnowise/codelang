@@ -1,3 +1,4 @@
+import { Pagination } from "@mui/material";
 import styled from "styled-components";
 
 export const HomeMain = styled.main`
@@ -8,16 +9,17 @@ export const HomeMain = styled.main`
 
 export const HomeHeading = styled.h2`
   font-size: 1.8rem;
+  margin-bottom: 2rem;
 `;
 
-export const StrongP = styled.p`
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin: 2rem auto;
+export const PostsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 `;
 
-export const DescriptionP = styled.p`
-  max-width: 50rem;
-  margin: auto;
-  font-size: 1.2rem;
+export const StyledHomePagination = styled(Pagination)`
+  width: 300px;
+  margin: 3rem auto;
 `;
