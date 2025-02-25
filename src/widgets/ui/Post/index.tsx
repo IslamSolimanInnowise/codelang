@@ -37,6 +37,7 @@ const Post: React.FC<PostProps> = ({
     openPostDialog,
     closePostDialog,
     isPostModalOpen,
+    currentPage,
   } = useSnippets();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const Post: React.FC<PostProps> = ({
       return;
     }
 
-    await getAllSnippets();
+    await getAllSnippets(currentPage);
   }
 
   async function handleDislike() {
@@ -60,7 +61,7 @@ const Post: React.FC<PostProps> = ({
       return;
     }
 
-    await getAllSnippets();
+    await getAllSnippets(currentPage);
   }
 
   async function handleCommentClick() {

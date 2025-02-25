@@ -3,21 +3,23 @@ import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
 import { MarkSnippetData, Snippet } from "./snippets.types";
 
-export const getSnippets = createAsyncThunk<Snippet[], void>(
-  "snippets/getSnippets",
-  async (_, thunkApi) => {
-    try {
-      const { data } = await axiosInstance.get("/snippets");
-      return data.data.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return thunkApi.rejectWithValue(error?.response?.data.message);
-      } else if (error instanceof Error) {
-        return thunkApi.rejectWithValue(error.message);
-      }
+export const getSnippets = createAsyncThunk<
+  { data: Snippet[]; meta: { totalPages: number; currentPage: number } },
+  number
+>("snippets/getSnippets", async (pageNumber, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/snippets?limit=5&page=${pageNumber}`
+    );
+    return data.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
     }
   }
-);
+});
 
 export const getMySnippets = createAsyncThunk<Snippet[], number>(
   "snippets/getMySnippets",

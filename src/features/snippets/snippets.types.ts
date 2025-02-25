@@ -25,6 +25,8 @@ export interface SnippetsState {
   post: Post | null;
   isCommentModalOpen: boolean;
   isPostModalOpen: boolean;
+  totalPages: number;
+  currentPage: number;
 }
 
 export interface Post {

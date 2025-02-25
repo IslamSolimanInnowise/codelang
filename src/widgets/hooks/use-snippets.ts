@@ -3,6 +3,7 @@ import {
   closePostModal,
   openCommentModal,
   openPostModal,
+  setCurrentPage,
 } from "@features/snippets/snippets.slice";
 import {
   addComment,
@@ -23,9 +24,12 @@ const useSnippets = () => {
   const snippetsStore = useAppSelector((state) => state.snippets);
   const dispatch = useAppDispatch();
 
-  const getAllSnippets = useCallback(() => {
-    return dispatch(getSnippets());
-  }, [dispatch]);
+  const getAllSnippets = useCallback(
+    (...data: Parameters<typeof getSnippets>) => {
+      return dispatch(getSnippets(...data));
+    },
+    [dispatch]
+  );
 
   const getMyPosts = useCallback(
     (...data: Parameters<typeof getMySnippets>) => {
@@ -106,6 +110,13 @@ const useSnippets = () => {
     dispatch(closePostModal());
   }, [dispatch]);
 
+  const changePage = useCallback(
+    (...data: Parameters<typeof setCurrentPage>) => {
+      dispatch(setCurrentPage(...data));
+    },
+    [dispatch]
+  );
+
   return {
     ...snippetsStore,
     getAllSnippets,
@@ -122,6 +133,7 @@ const useSnippets = () => {
     closeCommentDialog,
     openPostDialog,
     closePostDialog,
+    changePage,
   };
 };
 

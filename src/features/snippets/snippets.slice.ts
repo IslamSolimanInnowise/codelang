@@ -22,6 +22,8 @@ const initialState: SnippetsState = {
   post: null,
   isCommentModalOpen: false,
   isPostModalOpen: false,
+  totalPages: 1,
+  currentPage: 1,
 };
 
 const snippetsSlice = createSlice({
@@ -40,6 +42,9 @@ const snippetsSlice = createSlice({
     closePostModal(state) {
       state.isPostModalOpen = false;
     },
+    setCurrentPage(state, action) {
+      state.currentPage = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -48,8 +53,10 @@ const snippetsSlice = createSlice({
       })
       .addCase(getSnippets.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.snippets = action.payload;
-        state.posts = mapSnippetsToPosts(action.payload);
+        state.snippets = action.payload.data;
+        state.posts = mapSnippetsToPosts(action.payload.data);
+        state.totalPages = action.payload.meta.totalPages;
+        state.currentPage = action.payload.meta.currentPage;
       })
       .addCase(getSnippets.rejected, (state) => {
         state.isLoading = false;
@@ -157,4 +164,5 @@ export const {
   closePostModal,
   openCommentModal,
   openPostModal,
+  setCurrentPage,
 } = snippetsSlice.actions;
