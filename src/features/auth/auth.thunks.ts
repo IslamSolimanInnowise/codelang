@@ -69,11 +69,11 @@ export const logoutUser = createAsyncThunk<ThunkReturnType, void, ThunkApiType>(
   }
 );
 
-export const updateUsername = createAsyncThunk<
+export const updateUserInfo = createAsyncThunk<
   ThunkReturnType,
   { username: string },
   ThunkApiType
->("auth/updateUsername", async (userData, thunkApi) => {
+>("auth/updateUserInfo", async (userData, thunkApi) => {
   try {
     const { data } = await axiosInstance.patch("/me", userData);
     return data;

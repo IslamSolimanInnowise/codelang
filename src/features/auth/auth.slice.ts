@@ -6,7 +6,7 @@ import {
   logoutUser,
   registerUser,
   updatePassword,
-  updateUsername,
+  updateUserInfo,
 } from "./auth.thunks";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -71,16 +71,16 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload!;
       })
-      .addCase(updateUsername.pending, (state) => {
+      .addCase(updateUserInfo.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(updateUsername.fulfilled, (state, action) => {
+      .addCase(updateUserInfo.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.user = action.payload;
       })
-      .addCase(updateUsername.rejected, (state, action) => {
+      .addCase(updateUserInfo.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload!;
       })

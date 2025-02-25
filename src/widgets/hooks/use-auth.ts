@@ -5,7 +5,7 @@ import {
   logoutUser,
   registerUser,
   updatePassword,
-  updateUsername,
+  updateUserInfo,
 } from "@features/auth/auth.thunks";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
@@ -33,8 +33,8 @@ const useAuth = () => {
   const onLogoutSubmit = useCallback(() => dispatch(logoutUser()), [dispatch]);
 
   const onUpdateUsername = useCallback(
-    (...data: Parameters<typeof updateUsername>) => {
-      return dispatch(updateUsername(...data));
+    (...data: Parameters<typeof updateUserInfo>) => {
+      return dispatch(updateUserInfo(...data));
     },
     [dispatch]
   );

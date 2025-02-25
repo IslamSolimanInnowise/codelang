@@ -45,11 +45,11 @@ const UpdatePostModal: React.FC<UpdatePostProps> = ({
   const navigate = useNavigate();
   const { editSnippet, getSnippet } = useSnippets();
 
-  const onSubmit = handleSubmit(async (data) => {
-    await editSnippet({ ...data, id: postId }).unwrap();
+  const onSubmit = handleSubmit((data) => {
+    editSnippet({ ...data, id: postId });
     onClose();
+    getSnippet(postId);
     navigate(`${RoutesEnum.Snippet}/${postId}`);
-    await getSnippet(postId);
   });
 
   return (

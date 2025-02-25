@@ -22,8 +22,8 @@ const AppRoutes: React.FC = () => {
           <Route path={RoutesEnum.Profile} element={<ProfilePage />} />
           <Route path={RoutesEnum.Account} element={<AccountPage />} />
           <Route path={`${RoutesEnum.Snippet}/:id`} element={<SnippetPage />} />
-          <Route path={RoutesEnum.Add_Snippet} element={<AddSnippetPage />} />
-          <Route path={RoutesEnum.My_Snippets} element={<MySnippetsPage />} />
+          <Route path={RoutesEnum.AddSnippet} element={<AddSnippetPage />} />
+          <Route path={RoutesEnum.MySnippets} element={<MySnippetsPage />} />
         </Route>
       </Route>
     </Routes>
