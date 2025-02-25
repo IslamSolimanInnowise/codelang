@@ -27,7 +27,7 @@ const AccountDetails: React.FC = () => {
           </ButtonsContainer>
         </UserDataDiv>
       </UserDetailsDiv>
-      <UserStatistics />
+      <UserStatistics id={user!.id} />
     </AccountDetailsSection>
   );
 };

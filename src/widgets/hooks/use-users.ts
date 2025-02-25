@@ -1,4 +1,4 @@
-import { getAllUsers } from "@features/users/users.thunks";
+import { getAllUsers, getUser } from "@features/users/users.thunks";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
 
@@ -13,7 +13,12 @@ const useUsers = () => {
     [dispatch]
   );
 
-  return { ...usersStore, getUsers };
+  const getOneUser = useCallback(
+    (...data: Parameters<typeof getUser>) => dispatch(getUser(...data)),
+    [dispatch]
+  );
+
+  return { ...usersStore, getUsers, getOneUser };
 };
 
 export default useUsers;

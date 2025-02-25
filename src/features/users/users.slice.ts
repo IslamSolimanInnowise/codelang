@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UsersState } from "./users.types";
-import { getAllUsers } from "./users.thunks";
+import { getAllUsers, getUser } from "./users.thunks";
 
 const initialState: UsersState = {
   users: [],
-  isLoading: false,
+  user: null,
+  isLoading: true,
   currentPage: 1,
   totalPages: 1,
 };
@@ -25,6 +26,17 @@ const userSlice = createSlice({
         state.totalPages = action.payload.meta.totalPages;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
       });
