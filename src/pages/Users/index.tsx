@@ -3,6 +3,7 @@ import {
   AllUsersContainer,
   PageContent,
   PageMain,
+  StyledPagination,
   UsersHeading,
 } from "./Users.styles";
 import useUsers from "@widgets/hooks/use-users";
@@ -11,7 +12,9 @@ import Spinner from "@shared/ui/Spinner";
 import UserCard from "@widgets/ui/UserCard";
 
 const UsersPage: React.FC = () => {
-  const { getUsers, isLoading, users, currentPage } = useUsers();
+  const { getUsers, isLoading, users, currentPage, totalPages, changePage } =
+    useUsers();
+
   useEffect(() => {
     getUsers(currentPage);
   }, [getUsers, currentPage]);
@@ -19,6 +22,10 @@ const UsersPage: React.FC = () => {
   if (isLoading) {
     return <Spinner />;
   }
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
+    changePage(page);
+  };
 
   return (
     <PageMain>
@@ -32,6 +39,11 @@ const UsersPage: React.FC = () => {
               return <UserCard {...trueUser} key={trueUser.id} />;
             })}
         </AllUsersContainer>
+        <StyledPagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+        />
       </PageContent>
     </PageMain>
   );

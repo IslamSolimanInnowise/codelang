@@ -29,4 +29,9 @@ export const PostsContainer = styled.div`
 export const StyledPagination = styled(Pagination)`
   width: 300px;
   margin: 3rem auto;
+  display: flex;
+  justify-content: center;
+  background-color: whitesmoke;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
 `;

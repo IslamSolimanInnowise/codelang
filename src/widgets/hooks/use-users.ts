@@ -1,3 +1,4 @@
+import { setUsersPage } from "@features/users/users.slice";
 import { getAllUsers, getUser } from "@features/users/users.thunks";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
@@ -18,7 +19,14 @@ const useUsers = () => {
     [dispatch]
   );
 
-  return { ...usersStore, getUsers, getOneUser };
+  const changePage = useCallback(
+    (...data: Parameters<typeof setUsersPage>) => {
+      dispatch(setUsersPage(...data));
+    },
+    [dispatch]
+  );
+
+  return { ...usersStore, getUsers, getOneUser, changePage };
 };
 
 export default useUsers;

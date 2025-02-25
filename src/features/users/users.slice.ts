@@ -13,7 +13,11 @@ const initialState: UsersState = {
 const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    setUsersPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getAllUsers.pending, (state) => {
@@ -44,3 +48,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+export const { setUsersPage } = userSlice.actions;
