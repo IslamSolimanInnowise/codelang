@@ -1,4 +1,9 @@
-import { closeModal, openModal } from "@features/snippets/snippets.slice";
+import {
+  closeCommentModal,
+  closePostModal,
+  openCommentModal,
+  openPostModal,
+} from "@features/snippets/snippets.slice";
 import {
   addComment,
   addSnippet,
@@ -85,12 +90,20 @@ const useSnippets = () => {
     [dispatch]
   );
 
-  const openDialog = useCallback(() => {
-    dispatch(openModal());
+  const openCommentDialog = useCallback(() => {
+    dispatch(openCommentModal());
   }, [dispatch]);
 
-  const closeDialog = useCallback(() => {
-    dispatch(closeModal());
+  const closeCommentDialog = useCallback(() => {
+    dispatch(closeCommentModal());
+  }, [dispatch]);
+
+  const openPostDialog = useCallback(() => {
+    dispatch(openPostModal());
+  }, [dispatch]);
+
+  const closePostDialog = useCallback(() => {
+    dispatch(closePostModal());
   }, [dispatch]);
 
   return {
@@ -105,8 +118,10 @@ const useSnippets = () => {
     removeComment,
     editSnippet,
     editComment,
-    openDialog,
-    closeDialog,
+    openCommentDialog,
+    closeCommentDialog,
+    openPostDialog,
+    closePostDialog,
   };
 };
 

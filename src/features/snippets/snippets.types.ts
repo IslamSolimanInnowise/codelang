@@ -23,9 +23,8 @@ export interface SnippetsState {
   isLoading: boolean;
   posts: Post[];
   post: Post | null;
-  modal: {
-    isOpen: boolean;
-  };
+  isCommentModalOpen: boolean;
+  isPostModalOpen: boolean;
 }
 
 export interface Post {

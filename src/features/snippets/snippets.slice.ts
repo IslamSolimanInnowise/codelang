@@ -20,18 +20,25 @@ const initialState: SnippetsState = {
   isLoading: false,
   posts: [],
   post: null,
-  modal: { isOpen: false },
+  isCommentModalOpen: false,
+  isPostModalOpen: false,
 };
 
 const snippetsSlice = createSlice({
   name: "snippets",
   initialState,
   reducers: {
-    openModal(state) {
-      state.modal.isOpen = true;
+    openCommentModal(state) {
+      state.isCommentModalOpen = true;
     },
-    closeModal(state) {
-      state.modal.isOpen = false;
+    closeCommentModal(state) {
+      state.isCommentModalOpen = false;
+    },
+    openPostModal(state) {
+      state.isPostModalOpen = true;
+    },
+    closePostModal(state) {
+      state.isPostModalOpen = false;
     },
   },
   extraReducers(builder) {
@@ -145,4 +152,9 @@ const snippetsSlice = createSlice({
 });
 
 export default snippetsSlice.reducer;
-export const { openModal, closeModal } = snippetsSlice.actions;
+export const {
+  closeCommentModal,
+  closePostModal,
+  openCommentModal,
+  openPostModal,
+} = snippetsSlice.actions;

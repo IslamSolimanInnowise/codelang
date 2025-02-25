@@ -12,8 +12,14 @@ interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({ content, user, id }) => {
   const { user: authUser } = useAuth();
-  const { removeComment, openDialog, closeDialog, getSnippet, snippet, modal } =
-    useSnippets();
+  const {
+    removeComment,
+    openCommentDialog,
+    closeCommentDialog,
+    getSnippet,
+    snippet,
+    isCommentModalOpen,
+  } = useSnippets();
 
   const deleteComment = async () => {
     await removeComment(id);
@@ -26,7 +32,7 @@ const Comment: React.FC<CommentProps> = ({ content, user, id }) => {
       <p>{content}</p>
       {authUser!.username === user.username && (
         <CommentButtons>
-          <Button variant="contained" onClick={openDialog}>
+          <Button variant="contained" onClick={openCommentDialog}>
             Update
           </Button>
           <Button variant="contained" onClick={deleteComment}>
@@ -35,8 +41,8 @@ const Comment: React.FC<CommentProps> = ({ content, user, id }) => {
         </CommentButtons>
       )}
       <UpdateCommentModal
-        open={modal.isOpen}
-        onClose={closeDialog}
+        open={isCommentModalOpen}
+        onClose={closeCommentDialog}
         commentId={id}
       />
     </CommentContainer>

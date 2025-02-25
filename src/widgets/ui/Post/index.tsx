@@ -34,9 +34,9 @@ const Post: React.FC<PostProps> = ({
     getAllSnippets,
     getMyPosts,
     removeSnippet,
-    openDialog,
-    closeDialog,
-    modal,
+    openPostDialog,
+    closePostDialog,
+    isPostModalOpen,
   } = useSnippets();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ const Post: React.FC<PostProps> = ({
       />
       {user?.username === creator && (
         <PostsButtonsContainer>
-          <Button variant="contained" onClick={openDialog}>
+          <Button variant="contained" onClick={openPostDialog}>
             Update
           </Button>
           <Button variant="contained" onClick={handleDeletePost}>
@@ -95,7 +95,11 @@ const Post: React.FC<PostProps> = ({
           </Button>
         </PostsButtonsContainer>
       )}
-      <UpdatePostModal open={modal.isOpen} onClose={closeDialog} postId={id} />
+      <UpdatePostModal
+        open={isPostModalOpen}
+        onClose={closePostDialog}
+        postId={id}
+      />
     </PostContainer>
   );
 };
