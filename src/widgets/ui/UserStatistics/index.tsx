@@ -4,14 +4,16 @@ import { useEffect } from "react";
 import { UserStatisticsUl } from "./UserStatistics.styles";
 
 interface UserStatisticsProps {
-  id: number;
+  id?: number;
 }
 
 const UserStatistics: React.FC<UserStatisticsProps> = ({ id }) => {
   const { onGetStatistics, data, isLoading } = useStatistics();
 
   useEffect(() => {
-    onGetStatistics(id);
+    if (id) {
+      onGetStatistics(id);
+    }
   }, [id, onGetStatistics]);
 
   if (isLoading) {

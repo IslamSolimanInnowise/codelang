@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
   } = useSnippets();
 
   useEffect(() => {
-    getAllSnippets(currentPage);
+    getAllSnippets({ currentPage });
   }, [currentPage, getAllSnippets]);
 
   if (isLoading) {

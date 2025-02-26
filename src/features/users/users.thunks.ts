@@ -5,12 +5,15 @@ import { AxiosError } from "axios";
 
 export const getAllUsers = createAsyncThunk<
   { data: User[]; meta: { totalPages: number; currentPage: number } },
-  number
->("users/getAll", async (currentPage, thunkApi) => {
+  { currentPage: number; limit?: number }
+>("users/getAll", async (params, thunkApi) => {
   try {
-    const { data } = await axiosInstance.get(
-      `/users?limit=10&page=${currentPage}`
-    );
+    const { data } = await axiosInstance.get(`/users`, {
+      params: {
+        limit: params.limit || 10,
+        page: params.currentPage,
+      },
+    });
 
     return data.data;
   } catch (error) {

@@ -16,7 +16,7 @@ const UsersPage: React.FC = () => {
     useUsers();
 
   useEffect(() => {
-    getUsers(currentPage);
+    getUsers({ currentPage });
   }, [getUsers, currentPage]);
 
   if (isLoading) {
@@ -34,10 +34,7 @@ const UsersPage: React.FC = () => {
         <UsersHeading>These are all the users</UsersHeading>
         <AllUsersContainer>
           {users &&
-            users.map((user) => {
-              const trueUser = user!;
-              return <UserCard {...trueUser} key={trueUser.id} />;
-            })}
+            users.map((user) => user && <UserCard {...user} key={user.id} />)}
         </AllUsersContainer>
         <StyledPagination
           count={totalPages}

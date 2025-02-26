@@ -24,7 +24,7 @@ const MySnippetsPage: React.FC = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    getMyPosts({ userId: user!.id, page: mySnippetsCurrentPage });
+    getMyPosts({ userId: user!.id, currentPage: mySnippetsCurrentPage });
   }, [getMyPosts, user, mySnippetsCurrentPage]);
 
   if (isLoading) {

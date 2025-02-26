@@ -5,12 +5,15 @@ import { MarkSnippetData, Snippet } from "./snippets.types";
 
 export const getSnippets = createAsyncThunk<
   { data: Snippet[]; meta: { totalPages: number; currentPage: number } },
-  number
->("snippets/getSnippets", async (pageNumber, thunkApi) => {
+  { currentPage: number; limit?: number }
+>("snippets/getSnippets", async (reqData, thunkApi) => {
   try {
-    const { data } = await axiosInstance.get(
-      `/snippets?limit=5&page=${pageNumber}`
-    );
+    const { data } = await axiosInstance.get(`/snippets`, {
+      params: {
+        limit: reqData.limit || 5,
+        page: reqData.currentPage,
+      },
+    });
     return data.data;
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -23,12 +26,16 @@ export const getSnippets = createAsyncThunk<
 
 export const getMySnippets = createAsyncThunk<
   { data: Snippet[]; meta: { totalPages: number; currentPage: number } },
-  { userId: number; page: number }
+  { userId: number; currentPage: number; limit?: number }
 >("snippets/getMySnippets", async (reqData, thunkApi) => {
   try {
-    const { data } = await axiosInstance.get(
-      `/snippets?userId=${reqData.userId}&limit=5&page=${reqData.page}`
-    );
+    const { data } = await axiosInstance.get(`/snippets`, {
+      params: {
+        limit: reqData.limit || 5,
+        page: reqData.currentPage,
+        userId: reqData.userId,
+      },
+    });
     return data.data;
   } catch (error) {
     if (error instanceof AxiosError) {
