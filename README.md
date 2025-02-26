@@ -2,11 +2,17 @@
 
 todo:
 
-- fetch all users
-- upon clicking on one of them, fetch their statistics
-- after doing this, get rid of statistics as it's not needed
+- questions page (get request)
+- pagination and parameters of the request
+- add question modal
+- delete question modal
+- edit question modal
+- one question page (get request) with its answers (which is a get request from the answers part)
 
-next:
+  next:
 
-- questions
-- answers
+- get all answers of a question
+- add answer modal
+- delete answer modal
+- edit answer modal
+- mark answer as correct or incrrect modal
