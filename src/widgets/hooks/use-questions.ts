@@ -1,3 +1,4 @@
+import { changeQuestionsPage } from "@features/questions/questions.slice";
 import { getAllQuestions } from "@features/questions/questions.thunks";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useCallback } from "react";
@@ -13,6 +14,13 @@ const useQuestions = () => {
     [dispatch]
   );
 
-  return { ...questionsStore, getQuestions };
+  const changePage = useCallback(
+    (...data: Parameters<typeof changeQuestionsPage>) => {
+      dispatch(changeQuestionsPage(...data));
+    },
+    [dispatch]
+  );
+
+  return { ...questionsStore, getQuestions, changePage };
 };
 export default useQuestions;

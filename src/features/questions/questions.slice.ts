@@ -12,7 +12,11 @@ const initialState: QuestionsState = {
 const questionsSlice = createSlice({
   name: "questions",
   initialState,
-  reducers: {},
+  reducers: {
+    changeQuestionsPage(state, action) {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getAllQuestions.pending, (state) => {
@@ -31,4 +35,5 @@ const questionsSlice = createSlice({
   },
 });
 
+export const { changeQuestionsPage } = questionsSlice.actions;
 export default questionsSlice.reducer;
