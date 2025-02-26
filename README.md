@@ -2,8 +2,8 @@
 
 todo:
 
-- questions page (get request)
-- pagination and parameters of the request
+- questions page (get request) => done
+- pagination and parameters of the request => done
 - add question modal
 - delete question modal
 - edit question modal

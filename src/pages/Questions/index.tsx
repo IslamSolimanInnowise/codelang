@@ -4,6 +4,7 @@ import useQuestions from "@widgets/hooks/use-questions";
 import Spinner from "@shared/ui/Spinner";
 import { useEffect } from "react";
 import QuestionBox from "@widgets/ui/QuestionBox";
+import AddQuestionForm from "@widgets/ui/AddQuestionForm";
 
 const QuestionsPage: React.FC = () => {
   const {
@@ -32,6 +33,7 @@ const QuestionsPage: React.FC = () => {
       <Aside />
       <PageContent>
         <h2>Welcome to the questions page</h2>
+        <AddQuestionForm />
         {questions.map((q) => {
           return <QuestionBox {...q} key={q.id} />;
         })}

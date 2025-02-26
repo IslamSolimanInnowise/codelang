@@ -17,7 +17,22 @@ export const getAllQuestions = createAsyncThunk<
         page: reqData.currentPage,
       },
     });
-    console.log(data.data);
+    return data.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
+
+export const addQuestion = createAsyncThunk<
+  Question,
+  Pick<Question, "title" | "description" | "attachedCode">
+>("questions/addQuestion", async (reqBody, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.post("/questions", reqBody);
     return data.data;
   } catch (error) {
     if (error instanceof AxiosError) {

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { QuestionsState } from "./questions.types";
-import { getAllQuestions } from "./questions.thunks";
+import { addQuestion, getAllQuestions } from "./questions.thunks";
 
 const initialState: QuestionsState = {
   questions: [],
@@ -29,6 +29,16 @@ const questionsSlice = createSlice({
         state.totalPages = action.payload.meta.totalPages;
       })
       .addCase(getAllQuestions.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
+      })
+      .addCase(addQuestion.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addQuestion.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(addQuestion.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
       });
