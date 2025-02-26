@@ -22,7 +22,7 @@ const ProfilePage: React.FC = () => {
   } = useSnippets();
 
   useEffect(() => {
-    getAllSnippets(currentPage);
+    getAllSnippets({ currentPage });
   }, [getAllSnippets, currentPage]);
 
   if (isLoading) {

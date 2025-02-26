@@ -1,11 +1,10 @@
 import { Pagination } from "@mui/material";
 import styled from "styled-components";
 
-export const ProfileMain = styled.main`
+export const PageMain = styled.main`
   height: 100%;
   text-align: center;
   display: flex;
-  gap: 1rem;
 `;
 
 export const PageContent = styled.div`
@@ -13,16 +12,13 @@ export const PageContent = styled.div`
   padding: 1rem;
 `;
 
-export const ProfileHeading = styled.h2`
-  font-size: 1.8rem;
+export const UsersHeading = styled.h2`
   margin-bottom: 2rem;
 `;
 
-export const PostsContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+export const AllUsersContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
 `;
 

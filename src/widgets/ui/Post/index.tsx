@@ -47,22 +47,22 @@ const Post: React.FC<PostProps> = ({
     await postSnippetsMark({ id, mark: "like" });
 
     if (user?.username === creator) {
-      await getMyPosts({ userId: user.id, page: mySnippetsCurrentPage });
+      await getMyPosts({ userId: user.id, currentPage: mySnippetsCurrentPage });
       return;
     }
 
-    await getAllSnippets(currentPage);
+    await getAllSnippets({ currentPage });
   }
 
   async function handleDislike() {
     await postSnippetsMark({ id, mark: "dislike" });
 
     if (user?.username === creator) {
-      await getMyPosts({ userId: user.id, page: mySnippetsCurrentPage });
+      await getMyPosts({ userId: user.id, currentPage: mySnippetsCurrentPage });
       return;
     }
 
-    await getAllSnippets(currentPage);
+    await getAllSnippets({ currentPage });
   }
 
   async function handleCommentClick() {
@@ -72,7 +72,7 @@ const Post: React.FC<PostProps> = ({
 
   async function handleDeletePost() {
     await removeSnippet(id);
-    await getMyPosts({ userId: user!.id, page: mySnippetsCurrentPage });
+    await getMyPosts({ userId: user!.id, currentPage: mySnippetsCurrentPage });
   }
 
   return (

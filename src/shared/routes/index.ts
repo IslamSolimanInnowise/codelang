@@ -7,4 +7,5 @@ export enum RoutesEnum {
   Snippet = "/snippet",
   AddSnippet = "/add-snippet",
   MySnippets = "/my-snippets",
+  Users = "/users",
 }

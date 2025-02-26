@@ -11,5 +11,5 @@ export const profileNavData = [
   { linkText: "Post snippet", to: RoutesEnum.AddSnippet, src: snippetIMG },
   { linkText: "My snippets", to: RoutesEnum.MySnippets, src: snippetIMG },
   { linkText: "Questions", to: RoutesEnum.Home, src: question },
-  { linkText: "Users", to: RoutesEnum.Home, src: users },
+  { linkText: "Users", to: RoutesEnum.Users, src: users },
 ];

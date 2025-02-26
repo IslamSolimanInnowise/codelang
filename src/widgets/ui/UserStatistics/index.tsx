@@ -1,18 +1,20 @@
 import Spinner from "@shared/ui/Spinner";
-import useAuth from "@widgets/hooks/use-auth";
 import useStatistics from "@widgets/hooks/use-statistics";
 import { useEffect } from "react";
 import { UserStatisticsUl } from "./UserStatistics.styles";
 
-const UserStatistics: React.FC = () => {
-  const { user } = useAuth();
+interface UserStatisticsProps {
+  id?: number;
+}
+
+const UserStatistics: React.FC<UserStatisticsProps> = ({ id }) => {
   const { onGetStatistics, data, isLoading } = useStatistics();
 
   useEffect(() => {
-    if (user) {
-      onGetStatistics(user.id);
+    if (id) {
+      onGetStatistics(id);
     }
-  }, [user, onGetStatistics]);
+  }, [id, onGetStatistics]);
 
   if (isLoading) {
     return <Spinner />;
