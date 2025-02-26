@@ -17,6 +17,7 @@ export const getAllQuestions = createAsyncThunk<
         page: reqData.currentPage,
       },
     });
+    console.log(data.data);
     return data.data;
   } catch (error) {
     if (error instanceof AxiosError) {
