@@ -28,4 +28,5 @@ export interface QuestionsState {
   currentPage: number;
   totalPages: number;
   isQuestionModalOpen: boolean;
+  isAnswerModalOpen: boolean;
 }

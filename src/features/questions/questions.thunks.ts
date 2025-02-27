@@ -110,6 +110,25 @@ export const addAnswer = createAsyncThunk<
   }
 });
 
+export const updateAnswer = createAsyncThunk<
+  void,
+  { answerId: number; content: string }
+>("questions/updateAnswer", async (reqBody, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/answers/${reqBody.answerId}`,
+      reqBody
+    );
+    return data.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
+
 export const deleteAnswer = createAsyncThunk<Answer, number>(
   "questions/deleteAnswer",
   async (id, thunkApi) => {

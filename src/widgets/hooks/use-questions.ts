@@ -1,6 +1,8 @@
 import {
   changeQuestionsPage,
+  closeAnswerModal,
   closeQuestionModal,
+  openAnswerModal,
   openQuestionModal,
 } from "@features/questions/questions.slice";
 import {
@@ -10,6 +12,7 @@ import {
   deleteQuestion,
   getAllQuestions,
   getOneQuestion,
+  updateAnswer,
   updateQuestion,
 } from "@features/questions/questions.thunks";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
@@ -61,6 +64,13 @@ const useQuestions = () => {
     [dispatch]
   );
 
+  const editAnswer = useCallback(
+    (...data: Parameters<typeof updateAnswer>) => {
+      return dispatch(updateAnswer(...data));
+    },
+    [dispatch]
+  );
+
   const removeAnswer = useCallback(
     (...data: Parameters<typeof deleteAnswer>) => {
       return dispatch(deleteAnswer(...data));
@@ -83,6 +93,14 @@ const useQuestions = () => {
     dispatch(closeQuestionModal());
   }, [dispatch]);
 
+  const openAnswerDialog = useCallback(() => {
+    dispatch(openAnswerModal());
+  }, [dispatch]);
+
+  const closeAnswerDialog = useCallback(() => {
+    dispatch(closeAnswerModal());
+  }, [dispatch]);
+
   return {
     ...questionsStore,
     getQuestions,
@@ -91,10 +109,13 @@ const useQuestions = () => {
     editQuestion,
     removeQuestion,
     submitAnswer,
+    editAnswer,
     removeAnswer,
     changePage,
     openQuestionDialog,
     closeQuestionDialog,
+    openAnswerDialog,
+    closeAnswerDialog,
   };
 };
 export default useQuestions;

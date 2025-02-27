@@ -14,3 +14,10 @@ export const StyledCorrectIMG = styled.img`
   width: 1rem;
   margin-top: 1rem;
 `;
+
+export const ButtonsDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+`;
