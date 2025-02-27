@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { QuestionsState } from "./questions.types";
 import {
   addQuestion,
+  deleteQuestion,
   getAllQuestions,
   getOneQuestion,
 } from "./questions.thunks";
@@ -55,6 +56,16 @@ const questionsSlice = createSlice({
         state.question = action.payload;
       })
       .addCase(getOneQuestion.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
+      })
+      .addCase(deleteQuestion.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteQuestion.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteQuestion.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
       });

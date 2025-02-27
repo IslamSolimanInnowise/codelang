@@ -32,7 +32,6 @@ export const getOneQuestion = createAsyncThunk<Question, number>(
   async (id, thunkApi) => {
     try {
       const { data } = await axiosInstance.get(`/questions/${id}`);
-      console.log(data.data);
       return data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -59,3 +58,19 @@ export const addQuestion = createAsyncThunk<
     }
   }
 });
+
+export const deleteQuestion = createAsyncThunk<Question, number>(
+  "questions/deleteQuestion",
+  async (id, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.delete(`/questions/${id}`);
+      return data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  }
+);

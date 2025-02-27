@@ -1,6 +1,7 @@
 import { changeQuestionsPage } from "@features/questions/questions.slice";
 import {
   addQuestion,
+  deleteQuestion,
   getAllQuestions,
   getOneQuestion,
 } from "@features/questions/questions.thunks";
@@ -32,6 +33,13 @@ const useQuestions = () => {
     [dispatch]
   );
 
+  const removeQuestion = useCallback(
+    (...data: Parameters<typeof deleteQuestion>) => {
+      return dispatch(deleteQuestion(...data));
+    },
+    [dispatch]
+  );
+
   const changePage = useCallback(
     (...data: Parameters<typeof changeQuestionsPage>) => {
       dispatch(changeQuestionsPage(...data));
@@ -44,6 +52,7 @@ const useQuestions = () => {
     getQuestions,
     getQuestion,
     addNewQuestion,
+    removeQuestion,
     changePage,
   };
 };

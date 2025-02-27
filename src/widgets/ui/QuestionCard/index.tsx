@@ -7,16 +7,28 @@ import {
   StyledCard,
 } from "./QuestionCard.styles";
 import useAuth from "@widgets/hooks/use-auth";
+import useQuestions from "@widgets/hooks/use-questions";
+import { useNavigate } from "react-router";
+import { RoutesEnum } from "@shared/routes";
 
 const QuestionCard: React.FC<Question> = ({
   title,
   description,
   attachedCode,
   answers,
+  id,
   isResolved,
   user,
 }) => {
   const { user: authUser } = useAuth();
+  const { removeQuestion } = useQuestions();
+  const navigate = useNavigate();
+
+  const handleRemovingQuestion = () => {
+    removeQuestion(id);
+    navigate(RoutesEnum.Questions);
+  };
+
   return (
     <StyledCard>
       <Typography variant="h6" gutterBottom>
@@ -33,7 +45,9 @@ const QuestionCard: React.FC<Question> = ({
         </Typography>
       </QuestionUserDiv>
       {authUser?.username === user.username && (
-        <Button variant="contained">Delete</Button>
+        <Button variant="contained" onClick={handleRemovingQuestion}>
+          Delete
+        </Button>
       )}
       {answers.length > 0 && (
         <AnswersContainer>
