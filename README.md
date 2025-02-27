@@ -4,10 +4,10 @@ todo:
 
 - questions page (get request) => done
 - pagination and parameters of the request => done
-- add question modal
-- delete question modal
-- edit question modal
+- add question form => done
 - one question page (get request) with its answers (which is a get request from the answers part)
+- delete question
+- edit question
 
   next:
 

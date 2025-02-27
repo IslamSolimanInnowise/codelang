@@ -22,6 +22,7 @@ export interface Question {
 
 export interface QuestionsState {
   questions: Question[];
+  question: Question | null;
   isLoading: boolean;
   currentPage: number;
   totalPages: number;

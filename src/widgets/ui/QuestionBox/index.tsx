@@ -7,18 +7,25 @@ import {
   QuestionLogo,
   QuestionLogoContainer,
 } from "./QuestionBox.styles";
+import { useNavigate } from "react-router";
+import { RoutesEnum } from "@shared/routes";
 
 interface QuestionBoxProps {
   title: string;
   description: string;
   user: { username: string };
+  id: number;
 }
 
 const QuestionBox: React.FC<QuestionBoxProps> = ({
   title,
   description,
   user: { username },
+  id,
 }) => {
+  const navigate = useNavigate();
+
+  const handleEyeClick = () => navigate(`${RoutesEnum.Questions}/${id}`);
   return (
     <QuestionBoxContainer>
       <QuestionLogoContainer>
@@ -29,7 +36,7 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
         </div>
       </QuestionLogoContainer>
       <QuestionDescription>{description}</QuestionDescription>
-      <EyeLogo src={eyeIMG} alt="eye image" />
+      <EyeLogo src={eyeIMG} alt="eye image" onClick={handleEyeClick} />
     </QuestionBoxContainer>
   );
 };
