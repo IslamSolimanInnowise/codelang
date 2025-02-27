@@ -12,6 +12,7 @@ import useQuestions from "@widgets/hooks/use-questions";
 import { useNavigate } from "react-router";
 import { RoutesEnum } from "@shared/routes";
 import UpdateQuestionModal from "../UpdateQuestionModal";
+import AddAnswerForm from "../AddAnswerForm";
 
 const QuestionCard: React.FC<Question> = ({
   title,
@@ -66,6 +67,7 @@ const QuestionCard: React.FC<Question> = ({
         questionId={id}
         onClose={closeQuestionDialog}
       />
+      <AddAnswerForm />
       {answers?.length > 0 && (
         <AnswersContainer>
           <Typography variant="h6">Answers:</Typography>

@@ -4,6 +4,7 @@ import {
   openQuestionModal,
 } from "@features/questions/questions.slice";
 import {
+  addAnswer,
   addQuestion,
   deleteQuestion,
   getAllQuestions,
@@ -52,6 +53,13 @@ const useQuestions = () => {
     [dispatch]
   );
 
+  const submitAnswer = useCallback(
+    (...data: Parameters<typeof addAnswer>) => {
+      return dispatch(addAnswer(...data));
+    },
+    [dispatch]
+  );
+
   const changePage = useCallback(
     (...data: Parameters<typeof changeQuestionsPage>) => {
       dispatch(changeQuestionsPage(...data));
@@ -74,6 +82,7 @@ const useQuestions = () => {
     addNewQuestion,
     editQuestion,
     removeQuestion,
+    submitAnswer,
     changePage,
     openQuestionDialog,
     closeQuestionDialog,
