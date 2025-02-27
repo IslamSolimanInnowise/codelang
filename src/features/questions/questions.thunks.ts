@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "@shared/api/axios";
 import { AxiosError } from "axios";
-import { Answer, Question } from "./questions.types";
+import { Answer, Question, UpdateQuestion } from "./questions.types";
 
 export const getAllQuestions = createAsyncThunk<
   {
@@ -59,24 +59,24 @@ export const addQuestion = createAsyncThunk<
   }
 });
 
-export const updateQuestion = createAsyncThunk<
-  Question,
-  Pick<Question, "title" | "description" | "attachedCode" | "id">
->("questions/updateQuestion", async (reqBody, thunkApi) => {
-  try {
-    const { data } = await axiosInstance.patch(
-      `/questions/${reqBody.id}`,
-      reqBody
-    );
-    return data.data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return thunkApi.rejectWithValue(error?.response?.data.message);
-    } else if (error instanceof Error) {
-      return thunkApi.rejectWithValue(error.message);
+export const updateQuestion = createAsyncThunk<Question, UpdateQuestion>(
+  "questions/updateQuestion",
+  async (reqBody, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.patch(
+        `/questions/${reqBody.id}`,
+        reqBody
+      );
+      return data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
     }
   }
-});
+);
 
 export const deleteQuestion = createAsyncThunk<Question, number>(
   "questions/deleteQuestion",

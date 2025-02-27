@@ -53,9 +53,8 @@ const questionsSlice = createSlice({
         state.currentPage = action.payload.meta.currentPage;
         state.totalPages = action.payload.meta.totalPages;
       })
-      .addCase(getAllQuestions.rejected, (state, action) => {
+      .addCase(getAllQuestions.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(addQuestion.pending, (state) => {
         state.isLoading = true;
@@ -63,9 +62,8 @@ const questionsSlice = createSlice({
       .addCase(addQuestion.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(addQuestion.rejected, (state, action) => {
+      .addCase(addQuestion.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(getOneQuestion.pending, (state) => {
         state.isLoading = true;
@@ -74,9 +72,8 @@ const questionsSlice = createSlice({
         state.isLoading = false;
         state.question = action.payload;
       })
-      .addCase(getOneQuestion.rejected, (state, action) => {
+      .addCase(getOneQuestion.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(deleteQuestion.pending, (state) => {
         state.isLoading = true;
@@ -84,9 +81,8 @@ const questionsSlice = createSlice({
       .addCase(deleteQuestion.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(deleteQuestion.rejected, (state, action) => {
+      .addCase(deleteQuestion.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(updateQuestion.pending, (state) => {
         state.isLoading = true;
@@ -95,9 +91,8 @@ const questionsSlice = createSlice({
         state.isLoading = false;
         state.question = action.payload;
       })
-      .addCase(updateQuestion.rejected, (state, action) => {
+      .addCase(updateQuestion.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(addAnswer.pending, (state) => {
         state.isLoading = true;
@@ -105,9 +100,8 @@ const questionsSlice = createSlice({
       .addCase(addAnswer.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(addAnswer.rejected, (state, action) => {
+      .addCase(addAnswer.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(deleteAnswer.pending, (state) => {
         state.isLoading = true;
@@ -115,9 +109,8 @@ const questionsSlice = createSlice({
       .addCase(deleteAnswer.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(deleteAnswer.rejected, (state, action) => {
+      .addCase(deleteAnswer.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(updateAnswer.pending, (state) => {
         state.isLoading = true;
@@ -125,9 +118,8 @@ const questionsSlice = createSlice({
       .addCase(updateAnswer.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(updateAnswer.rejected, (state, action) => {
+      .addCase(updateAnswer.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(markAnswer.pending, (state) => {
         state.isLoading = true;
@@ -135,9 +127,8 @@ const questionsSlice = createSlice({
       .addCase(markAnswer.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(markAnswer.rejected, (state, action) => {
+      .addCase(markAnswer.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       });
   },
 });

@@ -30,6 +30,7 @@ export default tseslint.config(
       "no-inline-comments": "error",
       "no-warning-comments": "error",
       "no-comments/disallowComments": "error",
+      "no-alert": "error",
     },
   }
 );

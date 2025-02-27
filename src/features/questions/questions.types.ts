@@ -11,11 +11,14 @@ export interface Answer {
   user: User;
 }
 
-export interface Question {
+export interface UpdateQuestion {
   id: number;
   title: string;
   description: string;
   attachedCode: string;
+}
+
+export interface Question extends UpdateQuestion {
   answers: Answer[];
   user: User;
   isResolved: boolean;
