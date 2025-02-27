@@ -3,6 +3,7 @@ import { Button, Typography } from "@mui/material";
 import {
   AnswerDiv,
   AnswersContainer,
+  ButtonsDiv,
   QuestionUserDiv,
   StyledCard,
 } from "./QuestionCard.styles";
@@ -10,6 +11,7 @@ import useAuth from "@widgets/hooks/use-auth";
 import useQuestions from "@widgets/hooks/use-questions";
 import { useNavigate } from "react-router";
 import { RoutesEnum } from "@shared/routes";
+import UpdateQuestionModal from "../UpdateQuestionModal";
 
 const QuestionCard: React.FC<Question> = ({
   title,
@@ -21,7 +23,12 @@ const QuestionCard: React.FC<Question> = ({
   user,
 }) => {
   const { user: authUser } = useAuth();
-  const { removeQuestion } = useQuestions();
+  const {
+    removeQuestion,
+    isQuestionModalOpen,
+    closeQuestionDialog,
+    openQuestionDialog,
+  } = useQuestions();
   const navigate = useNavigate();
 
   const handleRemovingQuestion = () => {
@@ -45,15 +52,23 @@ const QuestionCard: React.FC<Question> = ({
         </Typography>
       </QuestionUserDiv>
       {authUser?.username === user.username && (
-        <Button variant="contained" onClick={handleRemovingQuestion}>
-          Delete
-        </Button>
+        <ButtonsDiv>
+          <Button variant="contained" onClick={handleRemovingQuestion}>
+            Delete
+          </Button>
+          <Button variant="contained" onClick={openQuestionDialog}>
+            Update
+          </Button>
+        </ButtonsDiv>
       )}
-      {answers.length > 0 && (
+      <UpdateQuestionModal
+        open={isQuestionModalOpen}
+        questionId={id}
+        onClose={closeQuestionDialog}
+      />
+      {answers?.length > 0 && (
         <AnswersContainer>
-          <Typography variant="h6" gutterBottom>
-            Answers:
-          </Typography>
+          <Typography variant="h6">Answers:</Typography>
           {answers.map((answer) => (
             <AnswerDiv key={answer.id}>
               <Typography variant="body2">{answer.content}</Typography>

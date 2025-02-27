@@ -26,4 +26,5 @@ export interface QuestionsState {
   isLoading: boolean;
   currentPage: number;
   totalPages: number;
+  isQuestionModalOpen: boolean;
 }

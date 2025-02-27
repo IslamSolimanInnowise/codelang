@@ -59,6 +59,25 @@ export const addQuestion = createAsyncThunk<
   }
 });
 
+export const updateQuestion = createAsyncThunk<
+  Question,
+  Pick<Question, "title" | "description" | "attachedCode" | "id">
+>("questions/updateQuestion", async (reqBody, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/questions/${reqBody.id}`,
+      reqBody
+    );
+    return data.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
+
 export const deleteQuestion = createAsyncThunk<Question, number>(
   "questions/deleteQuestion",
   async (id, thunkApi) => {

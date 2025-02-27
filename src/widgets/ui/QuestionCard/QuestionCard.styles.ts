@@ -19,6 +19,12 @@ export const QuestionUserDiv = styled.div`
   border-radius: 0.5rem;
 `;
 
+export const ButtonsDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
 export const AnswersContainer = styled.div`
   margin-top: 1rem;
 `;
@@ -28,4 +34,6 @@ export const AnswerDiv = styled.div`
   padding: 0.5rem;
   border-radius: 0.25rem;
   margin-bottom: 0.5rem;
+  overflow: auto;
+  word-wrap: break-word;
 `;

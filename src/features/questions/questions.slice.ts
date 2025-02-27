@@ -5,6 +5,7 @@ import {
   deleteQuestion,
   getAllQuestions,
   getOneQuestion,
+  updateQuestion,
 } from "./questions.thunks";
 
 const initialState: QuestionsState = {
@@ -13,6 +14,7 @@ const initialState: QuestionsState = {
   isLoading: false,
   currentPage: 1,
   totalPages: 1,
+  isQuestionModalOpen: false,
 };
 
 const questionsSlice = createSlice({
@@ -21,6 +23,12 @@ const questionsSlice = createSlice({
   reducers: {
     changeQuestionsPage(state, action) {
       state.currentPage = action.payload;
+    },
+    openQuestionModal(state) {
+      state.isQuestionModalOpen = true;
+    },
+    closeQuestionModal(state) {
+      state.isQuestionModalOpen = false;
     },
   },
   extraReducers(builder) {
@@ -68,9 +76,21 @@ const questionsSlice = createSlice({
       .addCase(deleteQuestion.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
+      })
+      .addCase(updateQuestion.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateQuestion.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.question = action.payload;
+      })
+      .addCase(updateQuestion.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
       });
   },
 });
 
-export const { changeQuestionsPage } = questionsSlice.actions;
+export const { changeQuestionsPage, openQuestionModal, closeQuestionModal } =
+  questionsSlice.actions;
 export default questionsSlice.reducer;
