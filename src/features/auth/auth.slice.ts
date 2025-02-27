@@ -91,12 +91,10 @@ const authSlice = createSlice({
       .addCase(updatePassword.fulfilled, (state) => {
         state.isLoading = false;
         state.error = null;
-        alert("Your password was successfully updated!");
       })
       .addCase(updatePassword.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload!;
-        alert(state.error);
       })
       .addCase(deleteUser.pending, (state) => {
         state.isLoading = true;

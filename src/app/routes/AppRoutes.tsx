@@ -12,6 +12,8 @@ import AddSnippetPage from "@pages/AddSnippet";
 import MySnippetsPage from "@pages/MySnippets";
 import UsersPage from "@pages/Users";
 import UserPage from "@pages/User";
+import QuestionsPage from "@pages/Questions";
+import QuestionPage from "@pages/Question";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -28,6 +30,11 @@ const AppRoutes: React.FC = () => {
           <Route path={RoutesEnum.MySnippets} element={<MySnippetsPage />} />
           <Route path={RoutesEnum.Users} element={<UsersPage />} />
           <Route path={`${RoutesEnum.Users}/:userId`} element={<UserPage />} />
+          <Route path={RoutesEnum.Questions} element={<QuestionsPage />} />
+          <Route
+            path={`${RoutesEnum.Questions}/:questionId`}
+            element={<QuestionPage />}
+          />
         </Route>
       </Route>
     </Routes>

@@ -29,9 +29,8 @@ const userSlice = createSlice({
         state.currentPage = action.payload.meta.currentPage;
         state.totalPages = action.payload.meta.totalPages;
       })
-      .addCase(getAllUsers.rejected, (state, action) => {
+      .addCase(getAllUsers.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(getUser.pending, (state) => {
         state.isLoading = true;
@@ -40,9 +39,8 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
       })
-      .addCase(getUser.rejected, (state, action) => {
+      .addCase(getUser.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       });
   },
 });

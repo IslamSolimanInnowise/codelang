@@ -85,9 +85,8 @@ const snippetsSlice = createSlice({
       .addCase(markSnippet.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(markSnippet.rejected, (state, action) => {
+      .addCase(markSnippet.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(getOneSnippet.pending, (state) => {
         state.isLoading = true;
@@ -108,9 +107,8 @@ const snippetsSlice = createSlice({
       .addCase(addComment.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(addComment.rejected, (state, action) => {
+      .addCase(addComment.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(deleteComment.pending, (state) => {
         state.isLoading = true;
@@ -118,9 +116,8 @@ const snippetsSlice = createSlice({
       .addCase(deleteComment.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(deleteComment.rejected, (state, action) => {
+      .addCase(deleteComment.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(updateComment.pending, (state) => {
         state.isLoading = true;
@@ -128,9 +125,8 @@ const snippetsSlice = createSlice({
       .addCase(updateComment.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(updateComment.rejected, (state, action) => {
+      .addCase(updateComment.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(addSnippet.pending, (state) => {
         state.isLoading = true;
@@ -138,9 +134,8 @@ const snippetsSlice = createSlice({
       .addCase(addSnippet.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(addSnippet.rejected, (state, action) => {
+      .addCase(addSnippet.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(deleteSnippet.pending, (state) => {
         state.isLoading = true;
@@ -148,9 +143,8 @@ const snippetsSlice = createSlice({
       .addCase(deleteSnippet.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(deleteSnippet.rejected, (state, action) => {
+      .addCase(deleteSnippet.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       })
       .addCase(updateSnippet.pending, (state) => {
         state.isLoading = true;
@@ -158,9 +152,8 @@ const snippetsSlice = createSlice({
       .addCase(updateSnippet.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(updateSnippet.rejected, (state, action) => {
+      .addCase(updateSnippet.rejected, (state) => {
         state.isLoading = false;
-        alert(action.payload);
       });
   },
 });
