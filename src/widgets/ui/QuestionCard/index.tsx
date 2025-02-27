@@ -1,7 +1,6 @@
 import { Question } from "@features/questions/questions.types";
 import { Button, Typography } from "@mui/material";
 import {
-  AnswerDiv,
   AnswersContainer,
   ButtonsDiv,
   QuestionUserDiv,
@@ -13,6 +12,7 @@ import { useNavigate } from "react-router";
 import { RoutesEnum } from "@shared/routes";
 import UpdateQuestionModal from "../UpdateQuestionModal";
 import AddAnswerForm from "../AddAnswerForm";
+import Answer from "../Answer";
 
 const QuestionCard: React.FC<Question> = ({
   title,
@@ -71,11 +71,9 @@ const QuestionCard: React.FC<Question> = ({
       {answers?.length > 0 && (
         <AnswersContainer>
           <Typography variant="h6">Answers:</Typography>
-          {answers.map((answer) => (
-            <AnswerDiv key={answer.id}>
-              <Typography variant="body2">{answer.content}</Typography>
-            </AnswerDiv>
-          ))}
+          {answers.map((answer) => {
+            return <Answer {...answer} key={answer.id} />;
+          })}
         </AnswersContainer>
       )}
     </StyledCard>

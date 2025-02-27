@@ -6,6 +6,7 @@ import {
 import {
   addAnswer,
   addQuestion,
+  deleteAnswer,
   deleteQuestion,
   getAllQuestions,
   getOneQuestion,
@@ -60,6 +61,13 @@ const useQuestions = () => {
     [dispatch]
   );
 
+  const removeAnswer = useCallback(
+    (...data: Parameters<typeof deleteAnswer>) => {
+      return dispatch(deleteAnswer(...data));
+    },
+    [dispatch]
+  );
+
   const changePage = useCallback(
     (...data: Parameters<typeof changeQuestionsPage>) => {
       dispatch(changeQuestionsPage(...data));
@@ -83,6 +91,7 @@ const useQuestions = () => {
     editQuestion,
     removeQuestion,
     submitAnswer,
+    removeAnswer,
     changePage,
     openQuestionDialog,
     closeQuestionDialog,

@@ -109,3 +109,19 @@ export const addAnswer = createAsyncThunk<
     }
   }
 });
+
+export const deleteAnswer = createAsyncThunk<Answer, number>(
+  "questions/deleteAnswer",
+  async (id, thunkApi) => {
+    try {
+      const { data } = await axiosInstance.delete(`/answers/${id}`);
+      return data.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return thunkApi.rejectWithValue(error?.response?.data.message);
+      } else if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  }
+);

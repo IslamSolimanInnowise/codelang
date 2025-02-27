@@ -1,13 +1,14 @@
-export interface Answer {
-  id: number;
-  content: string;
-  isCorrect: boolean;
-}
-
 interface User {
   id: number;
   username: string;
   role: string;
+}
+
+export interface Answer {
+  id: number;
+  content: string;
+  isCorrect: boolean;
+  user: User;
 }
 
 export interface Question {

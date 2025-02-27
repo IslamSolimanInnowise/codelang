@@ -3,6 +3,7 @@ import { QuestionsState } from "./questions.types";
 import {
   addAnswer,
   addQuestion,
+  deleteAnswer,
   deleteQuestion,
   getAllQuestions,
   getOneQuestion,
@@ -96,6 +97,16 @@ const questionsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(addAnswer.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
+      })
+      .addCase(deleteAnswer.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteAnswer.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteAnswer.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
       });
