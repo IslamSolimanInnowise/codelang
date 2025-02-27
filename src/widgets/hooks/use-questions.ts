@@ -12,6 +12,7 @@ import {
   deleteQuestion,
   getAllQuestions,
   getOneQuestion,
+  markAnswer,
   updateAnswer,
   updateQuestion,
 } from "@features/questions/questions.thunks";
@@ -71,6 +72,13 @@ const useQuestions = () => {
     [dispatch]
   );
 
+  const changeAnswerStatus = useCallback(
+    (...data: Parameters<typeof markAnswer>) => {
+      return dispatch(markAnswer(...data));
+    },
+    [dispatch]
+  );
+
   const removeAnswer = useCallback(
     (...data: Parameters<typeof deleteAnswer>) => {
       return dispatch(deleteAnswer(...data));
@@ -110,6 +118,7 @@ const useQuestions = () => {
     removeQuestion,
     submitAnswer,
     editAnswer,
+    changeAnswerStatus,
     removeAnswer,
     changePage,
     openQuestionDialog,

@@ -129,6 +129,24 @@ export const updateAnswer = createAsyncThunk<
   }
 });
 
+export const markAnswer = createAsyncThunk<
+  Answer,
+  { answerId: number; state: "correct" | "incorrect" }
+>("questions/markAnswer", async (reqData, thunkApi) => {
+  try {
+    const { data } = await axiosInstance.put(
+      `/answers/${reqData.answerId}/state/${reqData.state}`
+    );
+    return data.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return thunkApi.rejectWithValue(error?.response?.data.message);
+    } else if (error instanceof Error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+});
+
 export const deleteAnswer = createAsyncThunk<Answer, number>(
   "questions/deleteAnswer",
   async (id, thunkApi) => {

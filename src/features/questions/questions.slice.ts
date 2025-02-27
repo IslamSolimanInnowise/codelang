@@ -7,6 +7,7 @@ import {
   deleteQuestion,
   getAllQuestions,
   getOneQuestion,
+  markAnswer,
   updateAnswer,
   updateQuestion,
 } from "./questions.thunks";
@@ -125,6 +126,16 @@ const questionsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateAnswer.rejected, (state, action) => {
+        state.isLoading = false;
+        alert(action.payload);
+      })
+      .addCase(markAnswer.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(markAnswer.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(markAnswer.rejected, (state, action) => {
         state.isLoading = false;
         alert(action.payload);
       });

@@ -26,11 +26,26 @@ const Answer: React.FC<AnswerProps> = ({
     openAnswerDialog,
     closeAnswerDialog,
     isAnswerModalOpen,
+    changeAnswerStatus,
   } = useQuestions();
 
   const handleDeleteAnswer = async () => {
     if (question) {
       await removeAnswer(id);
+      await getQuestion(question.id);
+    }
+  };
+
+  const markCorrect = async () => {
+    if (question) {
+      await changeAnswerStatus({ answerId: id, state: "correct" });
+      await getQuestion(question.id);
+    }
+  };
+
+  const markIncorrect = async () => {
+    if (question) {
+      await changeAnswerStatus({ answerId: id, state: "incorrect" });
       await getQuestion(question.id);
     }
   };
@@ -48,6 +63,16 @@ const Answer: React.FC<AnswerProps> = ({
           <Button variant="contained" onClick={openAnswerDialog}>
             Edit
           </Button>
+          {question?.user.username === authUser.username && (
+            <>
+              <Button variant="contained" onClick={markCorrect}>
+                Mark as correct
+              </Button>
+              <Button variant="contained" onClick={markIncorrect}>
+                Mark as Incorrect
+              </Button>
+            </>
+          )}
         </ButtonsDiv>
       )}
       <UpdateAnswerModal
