@@ -8,7 +8,6 @@ export const AccountMain = styled.main`
 `;
 
 export const PageContent = styled.div`
-  width: 100%;
   padding: 1rem;
 `;
 

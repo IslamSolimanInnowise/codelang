@@ -5,7 +5,6 @@ export const AnswerDiv = styled.div`
   padding: 0.5rem;
   border-radius: 0.25rem;
   margin-bottom: 0.5rem;
-  overflow: auto;
   word-wrap: break-word;
 `;
 
