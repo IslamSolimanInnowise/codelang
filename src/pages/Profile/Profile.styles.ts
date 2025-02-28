@@ -4,7 +4,8 @@ import styled from "styled-components";
 export const ProfileMain = styled.main`
   height: 100%;
   text-align: center;
-  display: flex;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
   gap: 1rem;
 `;
 

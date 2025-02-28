@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const SnippetMain = styled.main`
   height: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
   gap: 1rem;
 `;
 

@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const AccountMain = styled.main`
   height: 100%;
   text-align: center;
-  display: flex;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
 `;
 
 export const PageContent = styled.div`

@@ -4,7 +4,6 @@ export const StyledAside = styled.aside`
   height: 100%;
   background-color: #1976d2;
   padding: 1rem;
-  width: 15rem;
 
   & img {
     width: 1rem;
