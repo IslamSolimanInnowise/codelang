@@ -72,7 +72,8 @@ const Post: React.FC<PostProps> = ({
 
   async function handleDeletePost() {
     await removeSnippet(id);
-    await getMyPosts({ userId: user!.id, currentPage: mySnippetsCurrentPage });
+    await getAllSnippets({ currentPage });
+    navigate(RoutesEnum.Profile);
   }
 
   return (
